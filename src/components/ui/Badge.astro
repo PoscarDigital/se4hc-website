@@ -1,0 +1,25 @@
+---
+interface Props {
+  variant?: 'new' | 'updated' | 'archived' | 'active' | 'closing' | 'awarded' | 'upcoming' | 'completed' | 'ongoing' | 'default';
+  label: string;
+}
+
+const { variant = 'default', label } = Astro.props;
+
+const styles: Record<string, string> = {
+  new: 'bg-green-100 text-green-800',
+  updated: 'bg-blue-100 text-blue-800',
+  archived: 'bg-gray-100 text-gray-600',
+  active: 'bg-green-100 text-green-800',
+  closing: 'bg-amber-100 text-amber-800',
+  awarded: 'bg-blue-100 text-blue-800',
+  upcoming: 'bg-purple-100 text-purple-800',
+  completed: 'bg-gray-200 text-gray-700',
+  ongoing: 'bg-teal-100 text-teal-800',
+  default: 'bg-gray-100 text-gray-700',
+};
+---
+
+<span class:list={['inline-block px-3 py-1 rounded-full text-xs font-semibold', styles[variant] ?? styles.default]}>
+  {label}
+</span>

@@ -1,0 +1,38 @@
+{
+  "main": [
+    { "key": "home", "href": "/" },
+    { "key": "about", "href": "/about" },
+    { "key": "reports", "href": "/reports" },
+    { "key": "resources", "href": "/resources" },
+    { "key": "news", "href": "/news" },
+    { "key": "stakeholders", "href": "/stakeholders" },
+    { "key": "procurement", "href": "/procurement" },
+    { "key": "faqs", "href": "/faqs" }
+  ],
+  "quickLinks": [
+    { "key": "reports", "href": "/reports", "icon": "document" },
+    { "key": "resources", "href": "/resources", "icon": "book" },
+    { "key": "news", "href": "/news", "icon": "newspaper" },
+    { "key": "procurement", "href": "/procurement", "icon": "briefcase" }
+  ],
+  "footer": {
+    "sections": [
+      {
+        "key": "quickLinks",
+        "links": [
+          { "key": "about", "href": "/about" },
+          { "key": "reports", "href": "/reports" },
+          { "key": "faqs", "href": "/faqs" }
+        ]
+      },
+      {
+        "key": "resources",
+        "links": [
+          { "key": "resources", "href": "/resources" },
+          { "key": "procurement", "href": "/procurement" },
+          { "key": "news", "href": "/news" }
+        ]
+      }
+    ]
+  }
+}

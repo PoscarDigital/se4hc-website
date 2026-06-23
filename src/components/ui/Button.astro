@@ -1,0 +1,19 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'accent' | 'outline';
+  class?: string;
+}
+
+const { href, variant = 'primary', class: className } = Astro.props;
+
+const variants: Record<string, string> = {
+  primary: 'btn btn-primary',
+  accent: 'btn btn-accent',
+  outline: 'btn border-2 border-white text-white hover:bg-white hover:text-primary',
+};
+---
+
+<a href={href} class:list={[variants[variant], className]}>
+  <slot />
+</a>

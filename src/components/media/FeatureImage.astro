@@ -1,0 +1,24 @@
+---
+import { asset } from '../../utils/helpers';
+
+interface Props {
+  src: string;
+  alt?: string;
+  class?: string;
+  /** aspect ratio utility, e.g. "aspect-video" (default) or "aspect-[4/3]" */
+  ratio?: string;
+  rounded?: boolean;
+}
+
+const { src, alt = '', class: className, ratio = 'aspect-video', rounded = true } = Astro.props;
+---
+
+<div class:list={['overflow-hidden bg-gray-100', ratio, { 'rounded-2xl': rounded }, className]}>
+  <img
+    src={asset(src)}
+    alt={alt}
+    class="w-full h-full object-cover"
+    loading="lazy"
+    decoding="async"
+  />
+</div>

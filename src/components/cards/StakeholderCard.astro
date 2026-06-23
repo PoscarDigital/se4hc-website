@@ -1,0 +1,19 @@
+---
+import { type Lang } from '../../utils/i18n';
+import { localize, type Localized } from '../../utils/helpers';
+
+interface Props {
+  name: Localized;
+  role: Localized;
+  stat: Localized;
+  lang: Lang;
+}
+
+const { name, role, stat, lang } = Astro.props;
+---
+
+<article class="card card-hover flex flex-col text-center">
+  <h3 class="text-lg font-bold text-primary mb-2">{localize(name, lang)}</h3>
+  <p class="text-gray-600 text-sm flex-grow mb-4">{localize(role, lang)}</p>
+  <p class="text-accent font-bold text-base bg-primary/5 rounded-lg py-2 px-3">{localize(stat, lang)}</p>
+</article>

@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { useTranslations, type Lang } from '../../utils/i18n';
+import Badge from '../ui/Badge.astro';
+
+interface Props {
+  event: CollectionEntry<'events'>;
+  lang: Lang;
+}
+
+const { event, lang } = Astro.props;
+const t = useTranslations(lang);
+const { title, dateLabel, location, status, excerpt } = event.data;
+
+const statusLabels: Record<string, Record<Lang, string>> = {
+  upcoming: { km: 'នាពេលខាងមុខ', en: 'Upcoming' },
+  ongoing: { km: 'កំពុងដំណើរការ', en: 'Ongoing' },
+  completed: { km: 'បានបញ្ចប់', en: 'Completed' },
+};
+---
+
+<article class="card flex flex-col border-l-4 border-secondary">
+  <div class="flex items-start justify-between gap-3 mb-3">
+    <div>
+      {dateLabel && <p class="text-secondary font-bold text-sm">{dateLabel}</p>}
+      {location && <p class="text-gray-500 text-xs">{location}</p>}
+    </div>
+    {status && <Badge variant={status} label={statusLabels[status]?.[lang] ?? status} />}
+  </div>
+  <h3 class="text-lg font-bold text-primary mb-2">{title}</h3>
+  {excerpt && <p class="text-gray-600 text-sm">{excerpt}</p>}
+</article>

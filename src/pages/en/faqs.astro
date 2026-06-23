@@ -1,0 +1,10 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import FaqsBody from '../../components/pages/FaqsBody.astro';
+import { useTranslations } from '../../utils/i18n';
+const t = useTranslations('en');
+---
+
+<PageLayout title={t('faqs.title')} subtitle={t('faqs.subtitle')} breadcrumbs={[{ label: t('nav.faqs') }]}>
+  <FaqsBody lang="en" />
+</PageLayout>

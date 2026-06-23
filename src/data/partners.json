@@ -1,0 +1,80 @@
+{
+  "partners": [
+    {
+      "id": "moeys",
+      "name": {
+        "km": "ក្រសួងអប់រំ យុវជន និងកីឡា",
+        "en": "Ministry of Education, Youth and Sport (MoEYS)"
+      },
+      "shortName": "MoEYS",
+      "logo": "/images/partners/moeys.png",
+      "website": "https://www.moeys.gov.kh"
+    },
+    {
+      "id": "adb",
+      "name": {
+        "km": "ធនាគារអភិវឌ្ឍន៍អាស៊ី",
+        "en": "Asian Development Bank (ADB)"
+      },
+      "shortName": "ADB",
+      "logo": "/images/partners/adb.png",
+      "website": "https://www.adb.org"
+    },
+    {
+      "id": "rgc",
+      "name": {
+        "km": "រាជរដ្ឋាភិបាលកម្ពុជា",
+        "en": "Royal Government of Cambodia"
+      },
+      "shortName": "RGC",
+      "logo": "/images/partners/rgc.png",
+      "website": "https://www.gov.kh"
+    }
+  ],
+  "implementingAgencies": [
+    {
+      "id": "pmu",
+      "name": {
+        "km": "អង្គភាពគ្រប់គ្រងគម្រោង (PMU)",
+        "en": "Project Management Unit (PMU)"
+      },
+      "description": {
+        "km": "សម្របសម្រួលគម្រោងទាំងមូល និងការគ្រប់គ្រង",
+        "en": "Overall project coordination and management"
+      }
+    },
+    {
+      "id": "piu1",
+      "name": {
+        "km": "អង្គភាពអនុវត្តគម្រោង ១ (PIU1) - នាយកដ្ឋានអប់រំទូទៅ",
+        "en": "Project Implementation Unit 1 (PIU1) - Department of General Education (DGE)"
+      },
+      "description": {
+        "km": "ការអភិវឌ្ឍន៍ហេដ្ឋារចនាសម្ព័ន្ធសាលា និងកម្មវិធីបណ្តុះបណ្តាលគ្រូ",
+        "en": "Secondary school infrastructure development and teacher training programs"
+      }
+    },
+    {
+      "id": "piu2",
+      "name": {
+        "km": "អង្គភាពអនុវត្តគម្រោង ២ (PIU2) - នាយកដ្ឋានអប់រំឧត្តមសិក្សាទូទៅ",
+        "en": "Project Implementation Unit 2 (PIU2) - Department of General Higher Education (DGHE)"
+      },
+      "description": {
+        "km": "ការពង្រឹងផ្លូវអប់រំក្រោយមធ្យមសិក្សា និងការលើកកម្ពស់គុណវុឌ្ឍិគ្រូ",
+        "en": "Post-secondary education pathway strengthening and teacher qualification upgrading"
+      }
+    },
+    {
+      "id": "itc",
+      "name": {
+        "km": "វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា (ITC)",
+        "en": "Institute of Technology of Cambodia (ITC)"
+      },
+      "description": {
+        "km": "ទីភ្នាក់ងារអនុវត្ត",
+        "en": "Implementing Agency"
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "primary": {
+    "name": {
+      "km": "បណ្ឌិត អម រ៉មនី",
+      "en": "Dr. Om Romny"
+    },
+    "title": {
+      "km": "នាយកគម្រោង, ក្រសួងអប់រំ យុវជន និងកីឡា",
+      "en": "Project Director, MoEYS"
+    },
+    "phone": "+855 12 775 294",
+    "email": "om.romny@moeys.gov.kh"
+  },
+  "manager": {
+    "name": {
+      "km": "បណ្ឌិត បូ ច័ន្ទកុលិកា",
+      "en": "Dr. Bo Chankoulika"
+    },
+    "title": {
+      "km": "អ្នកគ្រប់គ្រងគម្រោង, ក្រសួងអប់រំ យុវជន និងកីឡា",
+      "en": "Project Manager, MoEYS"
+    },
+    "phone": "+855 69 666 916",
+    "email": "bo.chankoulika@moeys.gov.kh"
+  },
+  "office": {
+    "address": {
+      "km": "អគារ ១០២ មហាវិថីព្រះនរោត្តម រាជធានីភ្នំពេញ កម្ពុជា",
+      "en": "Building 102, Preah Norodom Blvd, Phnom Penh, Cambodia"
+    },
+    "phone": "+855 23 722 512",
+    "email": "se4hc@moeys.gov.kh",
+    "website": "https://www.moeys.gov.kh"
+  }
+}

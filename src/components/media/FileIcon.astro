@@ -1,0 +1,35 @@
+---
+import type { AttachmentKind } from '../../utils/attachments';
+
+interface Props {
+  kind: AttachmentKind;
+  ext?: string;
+  class?: string;
+}
+
+const { kind, ext, class: className } = Astro.props;
+
+// Background color per kind for the badge.
+const colors: Record<AttachmentKind, string> = {
+  pdf: 'bg-red-100 text-red-700',
+  word: 'bg-blue-100 text-blue-700',
+  excel: 'bg-green-100 text-green-700',
+  powerpoint: 'bg-orange-100 text-orange-700',
+  image: 'bg-purple-100 text-purple-700',
+  archive: 'bg-yellow-100 text-yellow-700',
+  video: 'bg-pink-100 text-pink-700',
+  audio: 'bg-teal-100 text-teal-700',
+  file: 'bg-gray-100 text-gray-600',
+};
+---
+
+<span
+  class:list={[
+    'inline-flex items-center justify-center shrink-0 w-12 h-12 rounded-lg font-bold text-xs',
+    colors[kind],
+    className,
+  ]}
+  aria-hidden="true"
+>
+  {ext || kind.toUpperCase().slice(0, 4)}
+</span>

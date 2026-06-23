@@ -1,0 +1,161 @@
+{
+  "site": {
+    "title": "SE4HC Project",
+    "fullTitle": "Secondary Education for Human Capital Competitiveness",
+    "tagline": "Building Cambodia's Future Through Quality Education"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About the Project",
+    "reports": "Reports",
+    "resources": "Resources",
+    "news": "News & Events",
+    "stakeholders": "Stakeholder Engagement",
+    "procurement": "Procurement",
+    "faqs": "FAQs",
+    "contact": "Contact"
+  },
+  "common": {
+    "readMore": "Read More",
+    "download": "Download",
+    "viewDetails": "View Details",
+    "learnMore": "Learn More",
+    "submit": "Submit",
+    "search": "Search",
+    "all": "All",
+    "new": "New",
+    "updated": "Updated",
+    "phone": "Phone",
+    "email": "Email",
+    "website": "Website",
+    "address": "Address",
+    "backTo": "Back to",
+    "published": "Published",
+    "date": "Date",
+    "location": "Location",
+    "status": "Status",
+    "type": "Type",
+    "category": "Category",
+    "format": "Format",
+    "pages": "pages",
+    "viewAll": "View All",
+    "home": "Home",
+    "documents": "Documents & Downloads",
+    "attachments": "Attachments"
+  },
+  "footer": {
+    "contactInfo": "Contact Information",
+    "projectDetails": "Project Details",
+    "partners": "Partners",
+    "quickLinks": "Quick Links",
+    "resources": "Resources",
+    "timeline": "Timeline",
+    "copyright": "© 2025 SE4HC Project. All rights reserved."
+  },
+  "home": {
+    "heroTitle": "SE4HC Project",
+    "heroSubtitle": "Supporting priorities of phase 2 of Cambodia's Secondary Education Blueprint (CAMSEB) 2030. The project's impact is aligned with the government's Pentagonal Strategy to develop high-quality human resources for a knowledge-based society.",
+    "heroCta": "Learn More About SE4HC",
+    "overviewTitle": "Project Overview",
+    "overviewIntro": "The SE4HC project will support priorities of phase 2 of Cambodia's Secondary Education Blueprint (CAMSEB) 2030, focusing on infrastructure development, capacity building, and system improvement.",
+    "quickAccess": "Quick Access",
+    "infraTitle": "Infrastructure Development",
+    "infraText": "Construct 414 additional classrooms, upgrade existing facilities with modern labs, libraries, and smart classrooms across 259 secondary schools.",
+    "capacityTitle": "Capacity Building",
+    "capacityText": "Provide comprehensive professional development for 3,000+ teachers focusing on STEM education and 21st-century skills.",
+    "systemTitle": "System Improvement",
+    "systemText": "Strengthen assessment systems, improve learning outcomes, and enhance alignment with post-secondary education pathways."
+  },
+  "about": {
+    "title": "About the SE4HC Project",
+    "subtitle": "Comprehensive information about the Secondary Education for Human Capital Competitiveness Project — transforming Cambodia's secondary education through innovation, infrastructure, and capacity building.",
+    "overview": "Project Overview",
+    "overviewText": "The Secondary Education for Human Capital Competitiveness (SE4HC) project will support priorities of phase 2 of Cambodia's Secondary Education Blueprint (CAMSEB) 2030. The project's impact is aligned with the government's Pentagonal Strategy to develop high-quality human resources for a knowledge-based society.",
+    "rationale": "Project Rationale",
+    "rationaleText": "Persistent constraints in secondary education include: (i) low access and completion, (ii) poor alignment with 21st century skills and employability skills, (iii) inadequate effective learning assessment system, and (iv) lack of clear alignment and flexibility between secondary and post-secondary education pathways.",
+    "approachTitle": "STEM-Innovative Approach",
+    "components": "Key Components",
+    "infraDev": "Infrastructure Development",
+    "capacityDev": "Capacity Development",
+    "systemImprovement": "System Improvement",
+    "outcomes": "Expected Outcomes",
+    "structure": "Project Management Structure",
+    "structureText": "The SE4HC project is implemented through a coordinated management structure under the Ministry of Education, Youth and Sport (MoEYS), with the Institute of Technology of Cambodia (ITC) serving as the Implementing Agency.",
+    "administration": "Project Administration"
+  },
+  "reports": {
+    "title": "Project Reports",
+    "subtitle": "Access comprehensive reports, progress updates, and performance data for the SE4HC project. All reports provide transparent insights into project implementation, financial management, and achievement of development outcomes.",
+    "latest": "Latest Reports",
+    "archive": "Report Archive"
+  },
+  "resources": {
+    "title": "Project Resources",
+    "subtitle": "Comprehensive collection of documents, tools, training materials, and technical resources for the SE4HC project. Access implementation guides, policy documents, research papers, and multimedia content to support project understanding and implementation.",
+    "categories": "Resource Categories",
+    "featured": "Featured Resources",
+    "tools": "Quick Access Tools"
+  },
+  "news": {
+    "title": "News & Events",
+    "subtitle": "Stay updated with the latest developments, announcements, and upcoming activities for the SE4HC project. Access news stories, event schedules, press releases, and community engagement opportunities.",
+    "featured": "Featured News",
+    "latest": "Latest News",
+    "events": "Upcoming Events"
+  },
+  "stakeholders": {
+    "title": "Stakeholder Engagement",
+    "subtitle": "Engaging all stakeholders in the SE4HC project to ensure transparency, participation, and collective success in strengthening Cambodia's secondary education system.",
+    "groups": "Key Stakeholder Groups",
+    "approach": "Engagement Approach",
+    "timeline": "Engagement Activities",
+    "contacts": "Contact Information"
+  },
+  "procurement": {
+    "title": "Procurement",
+    "subtitle": "Transparent and competitive procurement processes for the SE4HC project, ensuring value for money and adherence to ADB and Government of Cambodia procurement guidelines.",
+    "overview": "Procurement Overview",
+    "categories": "Procurement Categories",
+    "process": "Procurement Process",
+    "awards": "Contract Awards Summary",
+    "guidelines": "Guidelines & Resources"
+  },
+  "faqs": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about the SE4HC project, from project basics to participation opportunities and technical details.",
+    "support": "Support Contact Information",
+    "categories": {
+      "general": "General Questions",
+      "education": "Education & Learning",
+      "procurement": "Procurement & Contracts",
+      "participation": "Participation & Stakeholder Engagement",
+      "technical": "Technical & Implementation"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with the SE4HC project team for inquiries, feedback, and collaboration opportunities.",
+    "office": "Project Office",
+    "team": "Project Team"
+  },
+  "stats": {
+    "totalInvestment": "Total Investment",
+    "schools": "Secondary Schools",
+    "classrooms": "New Classrooms",
+    "teachers": "Teachers Trained",
+    "adbLoan": "ADB Loan",
+    "govCounterpart": "Government Counterpart",
+    "physicalProgress": "Physical Progress",
+    "contractsAwarded": "Contracts Awarded",
+    "disbursement": "Disbursement",
+    "schoolsAssessed": "Schools Assessed",
+    "loanEffective": "Loan Effective Date",
+    "projectClosing": "Project Closing Date",
+    "implementationPeriod": "Implementation Period"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "Sorry, the page you are looking for does not exist or has been moved.",
+    "back": "Return Home"
+  }
+}

@@ -1,0 +1,10 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ContactBody from '../components/pages/ContactBody.astro';
+import { useTranslations } from '../utils/i18n';
+const t = useTranslations('km');
+---
+
+<PageLayout title={t('contact.title')} subtitle={t('contact.subtitle')} breadcrumbs={[{ label: t('nav.contact') }]}>
+  <ContactBody lang="km" />
+</PageLayout>

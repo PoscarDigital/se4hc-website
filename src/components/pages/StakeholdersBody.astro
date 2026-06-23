@@ -1,0 +1,87 @@
+---
+import { useTranslations, type Lang } from '../../utils/i18n';
+import { localize } from '../../utils/helpers';
+import StakeholderCard from '../cards/StakeholderCard.astro';
+import contacts from '../../data/contacts.json';
+import stakeholders from '../../data/stakeholders.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const contactList = [
+  { ...contacts.primary, role: lang === 'km' ? 'ការគ្រប់គ្រងគម្រោង' : 'Project Management' },
+  { ...contacts.manager, role: lang === 'km' ? 'ទំនាក់ទំនងភាគីពាក់ព័ន្ធ' : 'Stakeholder Relations' },
+];
+---
+
+<div class="space-y-14">
+  <!-- Groups -->
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('stakeholders.groups')}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {stakeholders.groups.map((g) => (
+        <StakeholderCard name={g.name} role={g.role} stat={g.stat} lang={lang} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('stakeholders.approach')}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {stakeholders.approach.map((a, i) => (
+        <div class="bg-white rounded-xl p-5 border-t-4 border-secondary">
+          <span class="text-accent font-bold text-2xl">{i + 1}</span>
+          <h3 class="font-bold text-primary mt-2 mb-2">{localize(a.title, lang)}</h3>
+          <p class="text-gray-600 text-sm">{localize(a.description, lang)}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="bg-gradient-to-br from-primary to-secondary text-white rounded-2xl p-8 text-center">
+    <p class="text-lg md:text-xl italic max-w-3xl mx-auto">
+      {lang === 'km'
+        ? '“យើងជឿជាក់ថា ការចូលរួមភាគីពាក់ព័ន្ធប្រកបដោយអត្ថន័យ គឺចាំបាច់សម្រាប់ភាពជោគជ័យប្រកបដោយចីរភាពនៃគម្រោង និងផលប៉ះពាល់យូរអង្វែងលើប្រព័ន្ធអប់រំមធ្យមសិក្សាកម្ពុជា។”'
+        : '“We believe that meaningful stakeholder engagement is essential for sustainable project success and lasting impact on Cambodia’s secondary education system.”'}
+    </p>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('stakeholders.timeline')}</h2>
+    <div class="space-y-4 border-l-2 border-secondary/30 pl-6">
+      {stakeholders.timeline.map((item) => (
+        <div class="relative">
+          <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-secondary"></span>
+          <p class="text-secondary font-bold text-sm">{localize(item.dateLabel, lang)}</p>
+          <h3 class="font-semibold text-primary">{localize(item.title, lang)}</h3>
+          <p class="text-gray-600 text-sm">{localize(item.description, lang)}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Contacts -->
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('stakeholders.contacts')}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {contactList.map((c) => (
+        <div class="card">
+          <p class="text-secondary font-semibold text-sm mb-1">{c.role}</p>
+          <h3 class="font-bold text-primary">{localize(c.name, lang)}</h3>
+          <p class="text-gray-600 text-sm mb-2">{localize(c.title, lang)}</p>
+          <p class="text-gray-600 text-sm">
+            {t('common.phone')}: {c.phone}<br />
+            {t('common.email')}: <a href={`mailto:${c.email}`} class="text-secondary hover:underline">{c.email}</a>
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+</div>

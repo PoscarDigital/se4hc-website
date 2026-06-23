@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #1e3a8a;
+  --color-secondary: #3b82f6;
+  --color-accent: #fbbf24;
+  --color-light-blue: #93c5fd;
+  --color-background: #f8fafc;
+  --color-text: #333333;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-text;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+  }
+
+  body.font-khmer,
+  .font-khmer {
+    font-family: 'Battambang', 'Noto Sans Khmer', 'Segoe UI', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold leading-tight;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-5;
+  }
+
+  .btn {
+    @apply inline-block px-6 py-3 rounded-lg font-bold transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-secondary text-white hover:bg-primary;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-primary hover:-translate-y-0.5;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-lg p-6 transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    @apply shadow-xl -translate-y-1;
+  }
+
+  .section-title {
+    @apply text-3xl text-primary text-center mb-10;
+  }
+
+  .prose-content :where(p) {
+    @apply mb-4 text-gray-700;
+  }
+
+  .prose-content :where(h2) {
+    @apply text-2xl text-primary mt-8 mb-4;
+  }
+
+  .prose-content :where(h3) {
+    @apply text-xl text-primary mt-6 mb-3;
+  }
+
+  .prose-content :where(ul) {
+    @apply list-disc pl-6 mb-4 space-y-1 text-gray-700;
+  }
+
+  .prose-content :where(a) {
+    @apply text-secondary underline hover:text-primary;
+  }
+}

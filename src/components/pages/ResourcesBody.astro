@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, type Lang } from '../../utils/i18n';
+import { localize } from '../../utils/helpers';
+import ResourceCard from '../cards/ResourceCard.astro';
+import pageContent from '../../data/page-content.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const res = pageContent.resources;
+
+const featured = (await getCollection('resources', (e) => e.data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<div class="space-y-14">
+  <!-- Categories -->
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('resources.categories')}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {res.categories.map((cat) => (
+        <div class="card card-hover">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="text-lg font-bold text-primary">{localize(cat.title, lang)}</h3>
+            <span class="text-accent font-bold text-sm">{localize(cat.count, lang)}</span>
+          </div>
+          <p class="text-gray-600 text-sm">{localize(cat.description, lang)}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Resources -->
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('resources.featured')}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {featured.map((resource) => <ResourceCard resource={resource} lang={lang} />)}
+    </div>
+  </section>
+
+  <!-- Quick Access Tools -->
+  <section class="bg-background rounded-2xl p-8">
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('resources.tools')}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {res.tools.map((tool) => (
+        <div class="bg-white rounded-xl p-5 text-center border-t-4 border-secondary">
+          <h3 class="font-bold text-primary mb-2">{localize(tool.title, lang)}</h3>
+          <p class="text-gray-600 text-sm">{localize(tool.description, lang)}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</div>

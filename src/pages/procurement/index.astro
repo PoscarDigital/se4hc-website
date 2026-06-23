@@ -1,0 +1,10 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ProcurementBody from '../../components/pages/ProcurementBody.astro';
+import { useTranslations } from '../../utils/i18n';
+const t = useTranslations('km');
+---
+
+<PageLayout title={t('procurement.title')} subtitle={t('procurement.subtitle')} breadcrumbs={[{ label: t('nav.procurement') }]}>
+  <ProcurementBody lang="km" />
+</PageLayout>

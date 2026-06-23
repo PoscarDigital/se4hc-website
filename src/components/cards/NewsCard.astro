@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { useTranslations, getLocalizedPath, type Lang } from '../../utils/i18n';
+import { formatDate, entrySlug, asset } from '../../utils/helpers';
+
+interface Props {
+  article: CollectionEntry<'news'>;
+  lang: Lang;
+  featured?: boolean;
+}
+
+const { article, lang, featured = false } = Astro.props;
+const t = useTranslations(lang);
+const { title, date, category, excerpt, featureImage, featureImageAlt } = article.data;
+const slug = entrySlug(article.id);
+const href = getLocalizedPath(`/news/${slug}`, lang);
+const imgAlt = featureImageAlt ?? title;
+---
+
+{featured ? (
+  <article class="card card-hover !p-0 overflow-hidden md:col-span-2 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 bg-gradient-to-br from-primary to-secondary text-white">
+    {featureImage && (
+      <a href={href} class="block">
+        <img src={asset(featureImage)} alt={imgAlt} class="w-full h-full object-cover min-h-[220px]" loading="lazy" />
+      </a>
+    )}
+    <div class:list={['p-8 flex flex-col', { 'md:col-span-2': !featureImage }]}>
+      <div class="flex items-center gap-3 mb-3 text-xs">
+        <span class="px-3 py-1 rounded-full font-semibold bg-white/20 text-white">{category}</span>
+        <span class="text-white/80">{formatDate(date, lang)}</span>
+      </div>
+      <h3 class="font-bold text-2xl mb-2">{title}</h3>
+      <p class="text-sm flex-grow mb-4 text-white/90">{excerpt}</p>
+      <a href={href} class="font-semibold text-sm no-underline mt-auto w-fit text-accent hover:text-white">
+        {t('common.readMore')} →
+      </a>
+    </div>
+  </article>
+) : (
+  <article class="card card-hover flex flex-col !p-0 overflow-hidden">
+    {featureImage && (
+      <a href={href} class="block">
+        <img src={asset(featureImage)} alt={imgAlt} class="w-full aspect-video object-cover" loading="lazy" />
+      </a>
+    )}
+    <div class="p-6 flex flex-col flex-grow">
+      <div class="flex items-center gap-3 mb-3 text-xs">
+        <span class="px-3 py-1 rounded-full font-semibold bg-blue-50 text-secondary">{category}</span>
+        <span class="text-gray-500">{formatDate(date, lang)}</span>
+      </div>
+      <h3 class="font-bold mb-2 text-lg text-primary">{title}</h3>
+      <p class="text-sm flex-grow mb-4 text-gray-600">{excerpt}</p>
+      <a href={href} class="font-semibold text-sm no-underline mt-auto w-fit text-secondary hover:text-primary">
+        {t('common.readMore')} →
+      </a>
+    </div>
+  </article>
+)}

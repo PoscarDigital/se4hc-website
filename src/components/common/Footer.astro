@@ -1,0 +1,63 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../utils/i18n';
+import { formatMillions, localize } from '../../utils/helpers';
+import navigation from '../../data/navigation.json';
+import contacts from '../../data/contacts.json';
+import siteData from '../../data/site.json';
+import partners from '../../data/partners.json';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<footer class="bg-primary text-white pt-12 pb-6 mt-16">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <h4 class="text-light-blue mb-4 font-bold text-lg">{t('footer.contactInfo')}</h4>
+        <p class="text-white/80 leading-relaxed text-sm">
+          {localize(contacts.primary.name, lang)}<br />
+          {localize(contacts.primary.title, lang)}<br />
+          {t('common.phone')}: {contacts.primary.phone}<br />
+          {t('common.email')}: {contacts.primary.email}
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-light-blue mb-4 font-bold text-lg">{t('footer.projectDetails')}</h4>
+        <p class="text-white/80 leading-relaxed text-sm">
+          {t('stats.totalInvestment')}: {formatMillions(siteData.totalInvestment)}<br />
+          {t('stats.adbLoan')}: {formatMillions(siteData.adbLoan)}<br />
+          Loan No. {siteData.loanNumber}<br />
+          {t('footer.timeline')}: 2025 – 2031
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-light-blue mb-4 font-bold text-lg">{t('footer.quickLinks')}</h4>
+        <ul class="space-y-2 text-sm list-none p-0 m-0">
+          {navigation.footer.sections[0].links.map((link) => (
+            <li>
+              <a href={getLocalizedPath(link.href, lang)} class="text-white/80 hover:text-white no-underline">
+                {t(`nav.${link.key}`)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-light-blue mb-4 font-bold text-lg">{t('footer.partners')}</h4>
+        <ul class="space-y-2 text-sm list-none p-0 m-0 text-white/80">
+          {partners.partners.map((p) => (
+            <li>{localize(p.name, lang)}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-5 text-center text-white/60 text-sm">
+      <p>{t('footer.copyright')} | {t('site.tagline')}</p>
+    </div>
+  </div>
+</footer>

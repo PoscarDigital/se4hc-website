@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { useTranslations } from '../../utils/i18n';
+import { formatDate, entrySlug } from '../../utils/helpers';
+import { resolveAttachments } from '../../utils/attachments';
+import FeatureImage from '../../components/media/FeatureImage.astro';
+import AttachmentList from '../../components/media/AttachmentList.astro';
+
+export async function getStaticPaths() {
+  const reports = await getCollection('reports', (e) => e.data.lang === 'km');
+  return reports.map((report) => ({
+    params: { slug: entrySlug(report.id) },
+    props: { report },
+  }));
+}
+
+const { report } = Astro.props;
+const { Content } = await render(report);
+const t = useTranslations('km');
+const { title, date, pages, featureImage, featureImageAlt } = report.data;
+const attachments = resolveAttachments(report.data.attachments, import.meta.env.BASE_URL);
+
+const metaParts = [
+  date && `${t('common.published')}: ${formatDate(date, 'km')}`,
+  pages && `${pages} ${t('common.pages')}`,
+].filter(Boolean) as string[];
+---
+
+<ContentLayout
+  title={title}
+  meta={metaParts.join(' · ')}
+  description={report.data.excerpt}
+  breadcrumbs={[{ label: t('nav.reports'), href: '/reports' }, { label: title }]}
+>
+  {featureImage && <FeatureImage src={featureImage} alt={featureImageAlt ?? title} class="mb-8" />}
+  <Content />
+  {attachments.length > 0 && (
+    <div class="mt-10 pt-8 border-t border-gray-200">
+      <AttachmentList attachments={attachments} lang="km" heading={t('common.documents')} />
+    </div>
+  )}
+</ContentLayout>

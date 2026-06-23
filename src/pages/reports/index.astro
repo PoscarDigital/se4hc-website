@@ -1,0 +1,10 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ReportsBody from '../../components/pages/ReportsBody.astro';
+import { useTranslations } from '../../utils/i18n';
+const t = useTranslations('km');
+---
+
+<PageLayout title={t('reports.title')} subtitle={t('reports.subtitle')} breadcrumbs={[{ label: t('nav.reports') }]}>
+  <ReportsBody lang="km" />
+</PageLayout>

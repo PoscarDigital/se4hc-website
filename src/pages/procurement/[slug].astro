@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { useTranslations } from '../../utils/i18n';
+import { formatCurrency, entrySlug } from '../../utils/helpers';
+
+export async function getStaticPaths() {
+  const items = await getCollection('procurement', (e) => e.data.lang === 'km');
+  return items.map((item) => ({
+    params: { slug: entrySlug(item.id) },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const t = useTranslations('km');
+const { title, type, method, contracts, value } = item.data;
+
+const metaParts = [
+  type,
+  method,
+  contracts && `${contracts} ${t('stats.contractsAwarded')}`,
+  value && formatCurrency(value),
+].filter(Boolean) as string[];
+---
+
+<ContentLayout
+  title={title}
+  meta={metaParts.join(' · ')}
+  description={item.data.excerpt}
+  breadcrumbs={[{ label: t('nav.procurement'), href: '/procurement' }, { label: title }]}
+>
+  <Content />
+</ContentLayout>

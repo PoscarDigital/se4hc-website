@@ -1,0 +1,33 @@
+---
+import { getLangFromUrl, getRoutePath, getLocalizedPath } from '../../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const route = getRoutePath(Astro.url.pathname);
+
+const kmHref = getLocalizedPath(route, 'km');
+const enHref = getLocalizedPath(route, 'en');
+---
+
+<div class="flex items-center gap-1 bg-white/10 rounded-full px-2 py-1 text-sm">
+  <a
+    href={kmHref}
+    class:list={[
+      'px-3 py-1 rounded-full transition-colors',
+      lang === 'km' ? 'bg-white text-primary font-bold' : 'text-white hover:bg-white/10',
+    ]}
+    aria-current={lang === 'km' ? 'true' : undefined}
+  >
+    ខ្មែរ
+  </a>
+  <span class="text-white/40">|</span>
+  <a
+    href={enHref}
+    class:list={[
+      'px-3 py-1 rounded-full transition-colors',
+      lang === 'en' ? 'bg-white text-primary font-bold' : 'text-white hover:bg-white/10',
+    ]}
+    aria-current={lang === 'en' ? 'true' : undefined}
+  >
+    EN
+  </a>
+</div>

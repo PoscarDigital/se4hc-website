@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, type Lang } from '../../utils/i18n';
+import FAQAccordion from '../sections/FAQAccordion.astro';
+import contacts from '../../data/contacts.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const faqs = (await getCollection('faqs', (e) => e.data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const categoryOrder = ['general', 'education', 'procurement', 'participation', 'technical'] as const;
+const byCategory = categoryOrder
+  .map((cat) => ({ cat, items: faqs.filter((f) => f.data.category === cat) }))
+  .filter((g) => g.items.length > 0);
+---
+
+<div class="space-y-12">
+  {byCategory.map((group) => (
+    <section>
+      <h2 class="text-2xl font-bold text-primary mb-5">{t(`faqs.categories.${group.cat}`)}</h2>
+      <FAQAccordion faqs={group.items} />
+    </section>
+  ))}
+
+  <section class="bg-background rounded-2xl p-8">
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('faqs.support')}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+      <div class="bg-white rounded-xl p-5">
+        <h3 class="font-bold text-primary mb-2">{t('common.email')}</h3>
+        <a href={`mailto:${contacts.office.email}`} class="text-secondary hover:underline">{contacts.office.email}</a>
+        <p class="text-gray-500 mt-1">{lang === 'km' ? 'ឆ្លើយតបក្នុងរយៈពេល ៤៨ ម៉ោង' : 'Response within 48 hours'}</p>
+      </div>
+      <div class="bg-white rounded-xl p-5">
+        <h3 class="font-bold text-primary mb-2">{t('common.phone')}</h3>
+        <p class="text-secondary">{contacts.office.phone}</p>
+        <p class="text-gray-500 mt-1">{lang === 'km' ? 'ច័ន្ទ–សុក្រ ៨:០០ ព្រឹក – ៥:០០ ល្ងាច' : 'Monday–Friday, 8:00 AM – 5:00 PM'}</p>
+      </div>
+      <div class="bg-white rounded-xl p-5">
+        <h3 class="font-bold text-primary mb-2">{t('common.address')}</h3>
+        <p class="text-gray-600">{contacts.office.address[lang]}</p>
+      </div>
+    </div>
+  </section>
+</div>

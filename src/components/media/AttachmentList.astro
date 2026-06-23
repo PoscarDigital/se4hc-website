@@ -1,0 +1,56 @@
+---
+import type { ResolvedAttachment } from '../../utils/attachments';
+import { type Lang } from '../../utils/i18n';
+import AttachmentRow from './AttachmentRow.astro';
+import AttachmentViewer from './AttachmentViewer.astro';
+
+interface Props {
+  attachments: ResolvedAttachment[];
+  lang: Lang;
+  /** Heading shown above the documents section. */
+  heading?: string;
+  /** Embed viewable files (pdf/image/video/audio) inline. Default true. */
+  preview?: boolean;
+}
+
+const { attachments, lang, heading, preview = true } = Astro.props;
+
+// Build stable anchor ids for viewable attachments so rows can link to them.
+const withIds = attachments.map((a, i) => ({
+  att: a,
+  viewerId: a.viewable ? `att-${i}` : undefined,
+}));
+
+const viewable = withIds.filter((x) => x.viewerId);
+---
+
+{attachments.length > 0 && (
+<section class="space-y-5">
+  {heading && <h2 class="text-2xl font-bold text-primary">{heading}</h2>}
+
+  {/* Inline preview of the first viewable attachment (featured / primary). */}
+  {preview && viewable.length > 0 && (
+    <AttachmentViewer attachment={viewable[0].att} lang={lang} id={viewable[0].viewerId} />
+  )}
+
+  {/* All attachments as a download/view list. */}
+  <div class="space-y-3">
+    {withIds.map(({ att, viewerId }) => (
+      <AttachmentRow
+        attachment={att}
+        lang={lang}
+        viewHref={preview && viewerId ? `#${viewerId}` : undefined}
+      />
+    ))}
+  </div>
+
+  {/* Additional viewable attachments beyond the first, embedded below the list. */}
+  {preview && viewable.length > 1 && (
+    <div class="space-y-6">
+      {viewable.slice(1).map(({ att, viewerId }) => (
+        <AttachmentViewer attachment={att} lang={lang} id={viewerId} />
+      ))}
+    </div>
+  )}
+</section>
+)}

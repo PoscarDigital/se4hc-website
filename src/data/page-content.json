@@ -1,0 +1,77 @@
+{
+  "procurement": {
+    "overviewStats": [
+      { "label": { "km": "កិច្ចសន្យាដែលបានផ្តល់", "en": "Contracts Awarded" }, "value": "13" },
+      { "label": { "km": "តម្លៃកិច្ចសន្យា", "en": "Contract Value" }, "value": "$901K", "note": "1.13%" },
+      { "label": { "km": "ការចំណាយសរុប", "en": "Total Disbursed" }, "value": "$1.16M", "note": "1.45%" },
+      { "label": { "km": "ចំនួនប្រាក់កម្ចី ADB", "en": "ADB Loan Amount" }, "value": "$80M" }
+    ],
+    "categories": [
+      {
+        "title": { "km": "កិច្ចសន្យាសំណង់", "en": "Works Contracts" },
+        "description": { "km": "គម្រោងសាងសង់ និងជួសជុលហេដ្ឋារចនាសម្ព័ន្ធអប់រំ", "en": "Construction and renovation projects for educational infrastructure" },
+        "items": {
+          "km": ["សាងសង់បន្ទប់រៀនថ្មី ៤១៤", "បង្គន់ និងកន្លែងលាងដៃ ៣០០", "ធ្វើឱ្យប្រសើរមន្ទីរពិសោធន៍វិទ្យាសាស្ត្រ ១៤០", "រៀបចំបន្ទប់កុំព្យូទ័រ ១១១"],
+          "en": ["414 new classrooms construction", "300 toilets and WASH facilities", "140 science labs upgrade", "111 computer labs setup"]
+        }
+      },
+      {
+        "title": { "km": "លទ្ធកម្មទំនិញ", "en": "Goods Procurement" },
+        "description": { "km": "ឧបករណ៍អប់រំ និងការផ្គត់ផ្គង់បច្ចេកវិទ្យា", "en": "Educational equipment and technology supplies" },
+        "items": {
+          "km": ["ឧបករណ៍មន្ទីរពិសោធន៍", "ឧបករណ៍កុំព្យូទ័រ និង IT", "ប្រព័ន្ធផ្ទាំងសូឡា", "គ្រឿងសង្ហារិម"],
+          "en": ["Laboratory equipment", "Computer and IT equipment", "Solar panel systems", "Furniture and fixtures"]
+        }
+      },
+      {
+        "title": { "km": "សេវាប្រឹក្សា", "en": "Consulting Services" },
+        "description": { "km": "ជំនាញបច្ចេកទេស និងការគាំទ្រកសាងសមត្ថភាព", "en": "Technical expertise and capacity building support" },
+        "items": {
+          "km": ["ទីប្រឹក្សាឯកត្តជន", "ការជ្រើសរើសផ្អែកលើគុណភាព", "ការបណ្តុះបណ្តាល និងអភិវឌ្ឍន៍", "ការគាំទ្រគ្រប់គ្រងគម្រោង"],
+          "en": ["Individual consultants", "Quality-based selection", "Training and development", "Project management support"]
+        }
+      }
+    ],
+    "process": [
+      { "step": 1, "title": { "km": "ការរៀបចំផែនការ", "en": "Planning" }, "description": { "km": "ការរៀបចំផែនការលទ្ធកម្ម និងការវាយតម្លៃតម្រូវការ", "en": "Procurement planning and needs assessment" } },
+      { "step": 2, "title": { "km": "ការដេញថ្លៃ", "en": "Bidding" }, "description": { "km": "ដំណើរការដេញថ្លៃប្រកួតប្រជែងបើកចំហ", "en": "Open competitive bidding process" } },
+      { "step": 3, "title": { "km": "ការវាយតម្លៃ", "en": "Evaluation" }, "description": { "km": "ការវាយតម្លៃបច្ចេកទេស និងហិរញ្ញវត្ថុ", "en": "Technical and financial evaluation" } },
+      { "step": 4, "title": { "km": "ការផ្តល់កិច្ចសន្យា", "en": "Award" }, "description": { "km": "ការផ្តល់កិច្ចសន្យា និងការអនុវត្ត", "en": "Contract award and implementation" } }
+    ]
+  },
+  "resources": {
+    "categories": [
+      { "title": { "km": "ឯកសារគោលនយោបាយ", "en": "Policy Documents" }, "count": { "km": "ឯកសារ ១២", "en": "12 Documents" }, "description": { "km": "គោលនយោបាយ មគ្គុទ្ទេសក៍ និងក្របខ័ណ្ឌបទប្បញ្ញត្តិផ្លូវការ", "en": "Official policies, guidelines, and regulatory frameworks for project implementation" } },
+      { "title": { "km": "សម្ភារៈបណ្តុះបណ្តាល", "en": "Training Materials" }, "count": { "km": "ធនធាន ២៨", "en": "28 Resources" }, "description": { "km": "ធនធានអប់រំ STEM ម៉ូឌុលបណ្តុះបណ្តាលគ្រូ និងមាតិកាអភិវឌ្ឍវិជ្ជាជីវៈ", "en": "STEM education resources, teacher training modules, and professional development content" } },
+      { "title": { "km": "មគ្គុទ្ទេសក៍បច្ចេកទេស", "en": "Technical Guides" }, "count": { "km": "មគ្គុទ្ទេសក៍ ១៥", "en": "15 Guides" }, "description": { "km": "សៀវភៅណែនាំអនុវត្ត ការបញ្ជាក់បច្ចេកទេស និងមគ្គុទ្ទេសក៍សំណង់", "en": "Implementation manuals, technical specifications, and construction guidelines" } },
+      { "title": { "km": "ស្រាវជ្រាវ និងទិន្នន័យ", "en": "Research & Data" }, "count": { "km": "ធាតុ ២២", "en": "22 Items" }, "description": { "km": "ឯកសារស្រាវជ្រាវ ឧបករណ៍វាយតម្លៃ និងឧបករណ៍ប្រមូលទិន្នន័យ", "en": "Research papers, assessment tools, and data collection instruments" } },
+      { "title": { "km": "ពហុមេឌៀ", "en": "Multimedia" }, "count": { "km": "ឯកសារ ១៨", "en": "18 Files" }, "description": { "km": "វីដេអូ បទបង្ហាញ ព័ត៌មានក្រាហ្វិក និងសម្ភារៈសិក្សាអន្តរកម្ម", "en": "Videos, presentations, infographics, and interactive learning materials" } },
+      { "title": { "km": "គំរូ និងទម្រង់", "en": "Templates & Forms" }, "count": { "km": "គំរូ ២៥", "en": "25 Templates" }, "description": { "km": "ទម្រង់ស្តង់ដារ គំរូ និងឧបករណ៍សម្រាប់គ្រប់គ្រងគម្រោង និងរាយការណ៍", "en": "Standardized forms, templates, and tools for project management and reporting" } }
+    ],
+    "tools": [
+      { "title": { "km": "កម្មវិធីទូរស័ព្ទ", "en": "Mobile App" }, "description": { "km": "កម្មវិធីទូរស័ព្ទ SE4HC សម្រាប់ការត្រួតពិនិត្យនៅទីវាល និងការប្រមូលទិន្នន័យ", "en": "SE4HC mobile application for field monitoring and data collection" } },
+      { "title": { "km": "វិបផតថលអនឡាញ", "en": "Online Portal" }, "description": { "km": "ចូលដំណើរការវិបផតថលធនធាន SE4HC សម្រាប់ការធ្វើបច្ចុប្បន្នភាពពេលវេលាជាក់ស្តែង", "en": "Access the SE4HC online resource portal for real-time updates" } },
+      { "title": { "km": "មជ្ឈមណ្ឌលគាំទ្រ", "en": "Support Center" }, "description": { "km": "ទទួលបានការគាំទ្របច្ចេកទេស និងជំនួយសម្រាប់ការចូលដំណើរការធនធាន", "en": "Get technical support and assistance for resource access" } }
+    ]
+  },
+  "about": {
+    "rationaleApproach": {
+      "km": ["ការកសាងស្ថាប័ន និងសមត្ថភាពជាប្រព័ន្ធ", "ការលើកកម្ពស់គុណវុឌ្ឍិគ្រូ", "ហេដ្ឋារចនាសម្ព័ន្ធសាលាធន់នឹងអាកាសធាតុ និងឌីជីថល", "ប្រព័ន្ធវាយតម្លៃការសិក្សាប្រសើរ"],
+      "en": ["Systematic institutional and capacity building", "Teacher qualification upgrading", "Climate-resilient and digital school infrastructure", "Enhanced learning assessment systems"]
+    },
+    "components": {
+      "infrastructure": {
+        "km": ["សាងសង់ និងបំពាក់បន្ទប់រៀនបន្ថែម ៤១៤ ជាមួយកន្លែងលាងដៃ", "ធ្វើឱ្យប្រសើរបន្ទប់រៀនទៅជាមន្ទីរពិសោធន៍វិទ្យាសាស្ត្រ ១៤០ បន្ទប់កុំព្យូទ័រ ១១១", "ដំឡើងអ៊ីនធឺណិតនៅសាលា ១២៣ និងផ្ទាំងសូឡានៅសាលា ៩០"],
+        "en": ["Construct and furnish additional 414 classrooms with WASH facilities", "Upgrade existing classrooms to 140 science labs, 111 computer labs", "Install intranet at 123 schools and solar panels in 90 schools"]
+      },
+      "capacity": {
+        "km": ["ផ្តល់ CPD ដល់គ្រូវិទ្យាសាស្ត្រ និងគណិតវិទ្យា ៣០០០ នាក់ ស្តីពីការអប់រំ STEM", "លើកកម្ពស់គុណវុឌ្ឍិគ្រូ ២៥០ នាក់ ដល់កម្រិតអនុបណ្ឌិត", "កែលម្អសមត្ថភាពភាសាអង់គ្លេសដោយផ្តល់ CPD ដល់គ្រូ ៦៣៨ នាក់"],
+        "en": ["Provide CPD to 3,000 Science and Math teachers on STEM education", "Upgrade 250 teachers' qualification to Master's Degree", "Improve English language proficiency by providing CPD to 638 teachers"]
+      },
+      "system": {
+        "km": ["ពង្រឹងការវាយតម្លៃថ្នាក់សាលាដោយបញ្ចូលជំនាញសតវត្សទី២១", "គាំទ្រដំណើរការមជ្ឈមណ្ឌលវិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យាកម្ពុជា", "បង្កើត និងបំពាក់មជ្ឈមណ្ឌលទិន្នន័យអប់រំរួមបញ្ចូលគ្នា"],
+        "en": ["Strengthen school-level assessment incorporating 21st century skills", "Support operationalization of Cambodia Science and Technology Center", "Establish and equip an integrated Education Data Center"]
+      }
+    }
+  }
+}

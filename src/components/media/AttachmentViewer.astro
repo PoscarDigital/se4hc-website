@@ -1,0 +1,46 @@
+---
+import type { ResolvedAttachment } from '../../utils/attachments';
+import { type Lang } from '../../utils/i18n';
+
+interface Props {
+  attachment: ResolvedAttachment;
+  lang: Lang;
+  id?: string;
+}
+
+const { attachment, lang, id } = Astro.props;
+const { href, label, kind } = attachment;
+---
+
+<figure id={id} class="scroll-mt-24 my-6">
+  {kind === 'pdf' && (
+    <div class="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+      <object data={`${href}#view=FitH`} type="application/pdf" class="w-full h-[75vh]">
+        <iframe src={href} title={label} class="w-full h-[75vh]" loading="lazy"></iframe>
+      </object>
+    </div>
+  )}
+
+  {kind === 'image' && (
+    <a href={href} target="_blank" rel="noopener" class="block">
+      <img src={href} alt={label} class="w-full rounded-xl border border-gray-200" loading="lazy" />
+    </a>
+  )}
+
+  {kind === 'video' && (
+    <video src={href} controls preload="metadata" class="w-full rounded-xl border border-gray-200">
+      <track kind="captions" />
+    </video>
+  )}
+
+  {kind === 'audio' && (
+    <audio src={href} controls preload="metadata" class="w-full"></audio>
+  )}
+
+  <figcaption class="text-center text-gray-500 text-sm mt-2">
+    {label}
+    <a href={href} target="_blank" rel="noopener" class="text-secondary hover:underline ml-2">
+      {lang === 'km' ? 'បើកក្នុងផ្ទាំងថ្មី ↗' : 'Open in new tab ↗'}
+    </a>
+  </figcaption>
+</figure>

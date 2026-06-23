@@ -1,0 +1,10 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import AboutBody from '../../components/pages/AboutBody.astro';
+import { useTranslations } from '../../utils/i18n';
+const t = useTranslations('en');
+---
+
+<PageLayout title={t('about.title')} subtitle={t('about.subtitle')} breadcrumbs={[{ label: t('nav.about') }]}>
+  <AboutBody lang="en" />
+</PageLayout>

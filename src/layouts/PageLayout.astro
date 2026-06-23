@@ -1,0 +1,29 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PageHeader from '../components/common/PageHeader.astro';
+import Breadcrumb from '../components/common/Breadcrumb.astro';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  breadcrumbs?: Crumb[];
+}
+
+const { title, subtitle, description, breadcrumbs } = Astro.props;
+---
+
+<BaseLayout title={title} description={description || subtitle}>
+  <PageHeader title={title} subtitle={subtitle} />
+  {breadcrumbs && breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
+  <div class="py-12">
+    <div class="container">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>

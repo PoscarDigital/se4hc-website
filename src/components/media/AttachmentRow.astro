@@ -1,0 +1,44 @@
+---
+import type { ResolvedAttachment } from '../../utils/attachments';
+import { kindLabel } from '../../utils/attachments';
+import { useTranslations, type Lang } from '../../utils/i18n';
+import FileIcon from './FileIcon.astro';
+
+interface Props {
+  attachment: ResolvedAttachment;
+  lang: Lang;
+  /** When the file is viewable, link "View" to the in-page preview anchor. */
+  viewHref?: string;
+}
+
+const { attachment, lang, viewHref } = Astro.props;
+const t = useTranslations(lang);
+const { href, label, ext, kind, viewable, size } = attachment;
+
+const meta = [kindLabel(kind, lang), size].filter(Boolean).join(' · ');
+---
+
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 hover:border-secondary transition-colors">
+  <FileIcon kind={kind} ext={ext} />
+  <div class="min-w-0 flex-grow">
+    <p class="font-semibold text-primary truncate" title={label}>{label}</p>
+    <p class="text-gray-500 text-xs">{meta}</p>
+  </div>
+  <div class="flex items-center gap-2 shrink-0">
+    {viewable && viewHref && (
+      <a
+        href={viewHref}
+        class="px-3 py-2 rounded-lg text-sm font-semibold text-secondary hover:bg-blue-50 no-underline"
+      >
+        {lang === 'km' ? 'មើល' : 'View'}
+      </a>
+    )}
+    <a
+      href={href}
+      download
+      class="px-3 py-2 rounded-lg text-sm font-semibold bg-secondary text-white hover:bg-primary no-underline whitespace-nowrap"
+    >
+      {t('common.download')} ↓
+    </a>
+  </div>
+</div>

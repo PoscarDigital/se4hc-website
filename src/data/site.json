@@ -1,0 +1,37 @@
+{
+  "loanNumber": "4517-CAM(COL)",
+  "totalInvestment": 83920000,
+  "adbLoan": 80000000,
+  "govCounterpart": 3920000,
+  "loanEffectiveDate": "2025-03-06",
+  "projectClosingDate": "2031-09-30",
+  "implementationPeriod": 6.5,
+  "targets": {
+    "schools": 259,
+    "classrooms": 414,
+    "scienceLabs": 140,
+    "computerLabs": 111,
+    "smartClassrooms": 110,
+    "teachersTrained": 3000,
+    "mastersDegrees": 250,
+    "provinces": 25,
+    "solarSchools": 90,
+    "internetSchools": 123
+  },
+  "currentProgress": {
+    "asOf": "2025-12-31",
+    "physicalProgress": 6.0,
+    "elapsedTime": 13.0,
+    "contractsAwarded": 13,
+    "contractValue": 901264,
+    "disbursement": 1163900,
+    "disbursementPercent": 1.45,
+    "schoolsAssessed": 245,
+    "fastTrackSchools": 25,
+    "status": "yellow",
+    "statusLabel": {
+      "km": "ពេញចិត្ត",
+      "en": "Satisfactory"
+    }
+  }
+}

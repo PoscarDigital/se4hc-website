@@ -1,0 +1,23 @@
+---
+import { useTranslations, type Lang } from '../../utils/i18n';
+import { localize } from '../../utils/helpers';
+import stats from '../../data/project-stats.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+  {stats.overview.map((stat) => (
+    <div class="text-center p-6 bg-background rounded-2xl">
+      <div class="text-3xl md:text-4xl font-bold text-primary mb-2">
+        {typeof stat.value === 'string' ? stat.value : localize(stat.value, lang)}
+      </div>
+      <div class="text-gray-600 text-sm md:text-base">{t(`stats.${stat.key}`)}</div>
+    </div>
+  ))}
+</div>

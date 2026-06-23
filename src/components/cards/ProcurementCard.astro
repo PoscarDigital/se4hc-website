@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { useTranslations, getLocalizedPath, type Lang } from '../../utils/i18n';
+import { formatCurrency, entrySlug } from '../../utils/helpers';
+import Badge from '../ui/Badge.astro';
+
+interface Props {
+  item: CollectionEntry<'procurement'>;
+  lang: Lang;
+}
+
+const { item, lang } = Astro.props;
+const t = useTranslations(lang);
+const { title, type, status, value, method, contracts } = item.data;
+const slug = entrySlug(item.id);
+
+const statusLabels: Record<string, Record<Lang, string>> = {
+  active: { km: 'កំពុងដំណើរការ', en: 'Active' },
+  closing: { km: 'ជិតបិទ', en: 'Closing' },
+  awarded: { km: 'បានផ្តល់', en: 'Awarded' },
+  upcoming: { km: 'នាពេលខាងមុខ', en: 'Upcoming' },
+};
+---
+
+<article class="card card-hover flex flex-col">
+  <div class="flex items-start justify-between gap-3 mb-3">
+    {type && (
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-secondary capitalize">
+        {type}
+      </span>
+    )}
+    {status && <Badge variant={status} label={statusLabels[status]?.[lang] ?? status} />}
+  </div>
+  <h3 class="text-lg font-bold text-primary mb-2">{title}</h3>
+  <dl class="text-sm text-gray-600 space-y-1 mb-4">
+    {contracts && (
+      <div class="flex justify-between">
+        <dt>{t('stats.contractsAwarded')}</dt>
+        <dd class="font-semibold">{contracts}</dd>
+      </div>
+    )}
+    {method && (
+      <div class="flex justify-between">
+        <dt>{t('common.type')}</dt>
+        <dd class="font-semibold text-right">{method}</dd>
+      </div>
+    )}
+    {value && (
+      <div class="flex justify-between">
+        <dt>{t('stats.totalInvestment')}</dt>
+        <dd class="font-semibold">{formatCurrency(value)}</dd>
+      </div>
+    )}
+  </dl>
+  <a
+    href={getLocalizedPath(`/procurement/${slug}`, lang)}
+    class="text-secondary font-semibold text-sm no-underline hover:text-primary mt-auto w-fit"
+  >
+    {t('common.viewDetails')} →
+  </a>
+</article>

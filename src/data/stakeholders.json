@@ -1,0 +1,128 @@
+{
+  "groups": [
+    {
+      "name": { "km": "សិស្ស និងសហគមន៍", "en": "Students & Communities" },
+      "role": {
+        "km": "សិស្សមកពីសាលាមធ្យមសិក្សា ២៥៩ គ្រួសាររបស់ពួកគេ និងសហគមន៍មូលដ្ឋានដែលទទួលផលពីហេដ្ឋារចនាសម្ព័ន្ធអប់រំប្រសើរ និងការបង្រៀនប្រកបដោយគុណភាព។",
+        "en": "Students from 259 secondary schools, their families, and local communities who benefit from improved educational infrastructure and quality teaching."
+      },
+      "stat": { "km": "សិស្ស ៥០,០០០+ នាក់ ទទួលផល", "en": "50,000+ Students Impacted" }
+    },
+    {
+      "name": { "km": "ដៃគូរដ្ឋាភិបាល", "en": "Government Partners" },
+      "role": {
+        "km": "ក្រសួងអប់រំ យុវជន និងកីឡា (MoEYS) មន្ទីរអប់រំខេត្ត និងអាជ្ញាធរមូលដ្ឋាន។",
+        "en": "Ministry of Education, Youth and Sport (MoEYS), Provincial Education Departments, and local government authorities."
+      },
+      "stat": { "km": "ខេត្ត ២៥ ចូលរួម", "en": "25 Provinces Involved" }
+    },
+    {
+      "name": { "km": "គ្រូបង្រៀន និងបុគ្គលិក", "en": "Educators & Staff" },
+      "role": {
+        "km": "គ្រូបង្រៀនមធ្យមសិក្សា នាយកសាលា អ្នកត្រួតពិនិត្យការអប់រំ និងបុគ្គលិករដ្ឋបាលដែលចូលរួមក្នុងការអនុវត្តគម្រោង។",
+        "en": "Secondary school teachers, principals, education supervisors, and administrative staff involved in project implementation."
+      },
+      "stat": { "km": "គ្រូ ៣,០០០+ នាក់ ចូលរួម", "en": "3,000+ Teachers Engaged" }
+    },
+    {
+      "name": { "km": "ដៃគូអភិវឌ្ឍន៍", "en": "Development Partners" },
+      "role": {
+        "km": "ធនាគារអភិវឌ្ឍន៍អាស៊ី (ADB) អង្គការអន្តរជាតិ អង្គការមិនមែនរដ្ឋាភិបាល និងអ្នកផ្តល់ជំនួយបច្ចេកទេសគាំទ្រគម្រោង។",
+        "en": "Asian Development Bank (ADB), international organizations, NGOs, and technical assistance providers supporting the project."
+      },
+      "stat": { "km": "អង្គការដៃគូ ១៥+", "en": "15+ Partner Organizations" }
+    },
+    {
+      "name": { "km": "វិស័យឯកជន", "en": "Private Sector" },
+      "role": {
+        "km": "ក្រុមហ៊ុនសំណង់ អ្នកផ្តល់បច្ចេកវិទ្យា អង្គការបណ្តុះបណ្តាល និងអ្នកផ្គត់ផ្គង់ដែលរួមចំណែកក្នុងការអនុវត្តគម្រោង។",
+        "en": "Construction companies, technology providers, training organizations, and suppliers contributing to project implementation."
+      },
+      "stat": { "km": "ដៃគូឯកជន ៥០+", "en": "50+ Private Partners" }
+    },
+    {
+      "name": { "km": "សង្គមស៊ីវិល", "en": "Civil Society" },
+      "role": {
+        "km": "អង្គការផ្អែកលើសហគមន៍ សមាគមមាតាបិតា ក្រុមប្រឹក្សាសិស្ស និងក្រុមតស៊ូមតិដែលលើកកម្ពស់ការអប់រំប្រកបដោយគុណភាព។",
+        "en": "Community-based organizations, parent associations, student councils, and advocacy groups promoting quality education."
+      },
+      "stat": { "km": "ក្រុមសហគមន៍ ១០០+", "en": "100+ Community Groups" }
+    }
+  ],
+  "approach": [
+    {
+      "title": { "km": "ការចែករំលែកព័ត៌មាន", "en": "Information Sharing" },
+      "description": {
+        "km": "ការធ្វើបច្ចុប្បន្នភាពជាប្រចាំតាមរយៈគេហទំព័រ ព្រឹត្តិបត្រ របាយការណ៍ និងកិច្ចប្រជុំសហគមន៍ ដើម្បីឱ្យភាគីពាក់ព័ន្ធទទួលបានព័ត៌មាន។",
+        "en": "Regular updates through websites, newsletters, reports, and community meetings to keep stakeholders informed."
+      }
+    },
+    {
+      "title": { "km": "ការពិគ្រោះយោបល់", "en": "Consultation" },
+      "description": {
+        "km": "ការពិគ្រោះយោបល់ ការស្ទង់មតិ និងវគ្គប្រមូលមតិដែលមានរចនាសម្ព័ន្ធ ដើម្បីប្រមូលធាតុចូលលើការរចនា និងការអនុវត្តគម្រោង។",
+        "en": "Structured consultations, surveys, and feedback sessions to gather input on project design and implementation."
+      }
+    },
+    {
+      "title": { "km": "ការសហការ", "en": "Collaboration" },
+      "description": {
+        "km": "ការរៀបចំផែនការរួម ការអនុវត្តរួម និងការសម្រេចចិត្តរួមជាមួយក្រុមភាគីពាក់ព័ន្ធសំខាន់ៗ។",
+        "en": "Joint planning, co-implementation, and shared decision-making with key stakeholder groups."
+      }
+    },
+    {
+      "title": { "km": "ការត្រួតពិនិត្យ", "en": "Monitoring" },
+      "description": {
+        "km": "ការត្រួតពិនិត្យ និងវាយតម្លៃប្រកបដោយការចូលរួម ដែលពាក់ព័ន្ធភាគីពាក់ព័ន្ធក្នុងការតាមដានវឌ្ឍនភាព និងលទ្ធផល។",
+        "en": "Participatory monitoring and evaluation involving stakeholders in tracking progress and outcomes."
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "dateLabel": { "km": "តុលា ២០២៥", "en": "Oct 2025" },
+      "title": {
+        "km": "បេសកកម្មពិនិត្យ ADB និងការពិគ្រោះយោបល់ភាគីពាក់ព័ន្ធ",
+        "en": "ADB Review Mission & Stakeholder Consultations"
+      },
+      "description": {
+        "km": "បានបញ្ចប់បេសកកម្មពិនិត្យ ADB ជាមួយការពិគ្រោះយោបល់ភាគីពាក់ព័ន្ធនៅទូទាំងទីភ្នាក់ងារអនុវត្ត។ គម្រោងត្រូវបានវាយតម្លៃថាពេញចិត្ត ដោយមានកិច្ចសន្យា ១៣ ត្រូវបានផ្តល់។",
+        "en": "Completed ADB review mission with stakeholder consultations across implementing agencies. Project rated satisfactory with 13 contracts awarded."
+      }
+    },
+    {
+      "dateLabel": { "km": "ត្រីមាសទី៤ ២០២៥", "en": "Q4 2025" },
+      "title": {
+        "km": "ការវាយតម្លៃទីតាំងសាលា — ២៤៥ សាលា",
+        "en": "School Site Assessments — 245 Schools"
+      },
+      "description": {
+        "km": "ការវាយតម្លៃទីតាំងទូលំទូលាយត្រូវបានបញ្ចប់សម្រាប់សាលាមធ្យមសិក្សា ២៤៥ នៅទូទាំងខេត្ត ២៥ ដោយចូលរួមជាមួយសហគមន៍មូលដ្ឋាន និងអ្នកគ្រប់គ្រងសាលា។",
+        "en": "Comprehensive site assessments completed for 245 secondary schools across 25 provinces, engaging local communities and school administrators."
+      }
+    },
+    {
+      "dateLabel": { "km": "ត្រីមាសទី១ ២០២៦", "en": "Q1 2026" },
+      "title": {
+        "km": "ការចូលរួមសាលាសាកល្បងបន្ទាន់",
+        "en": "Fast-Track Pilot School Engagement"
+      },
+      "description": {
+        "km": "ការចូលរួមភាគីពាក់ព័ន្ធយ៉ាងសកម្មនៅសាលាសាកល្បង ២៥ សម្រាប់ការអនុវត្តបន្ទាន់ រួមមានការពិគ្រោះយោបល់គ្រូ និងកិច្ចប្រជុំសហគមន៍។",
+        "en": "Intensive stakeholder engagement at 25 pilot schools for fast-track implementation, including teacher consultations and community meetings."
+      }
+    },
+    {
+      "dateLabel": { "km": "ត្រីមាសទី២ ២០២៦", "en": "Q2 2026" },
+      "title": {
+        "km": "សិក្ខាសាលាភាគីពាក់ព័ន្ធប្រចាំឆ្នាំ",
+        "en": "Annual Stakeholder Workshop"
+      },
+      "description": {
+        "km": "ការពិនិត្យទូលំទូលាយនៃវឌ្ឍនភាពឆ្នាំទី១ ជាមួយភាគីពាក់ព័ន្ធសំខាន់ៗទាំងអស់ ការរៀបចំផែនការសម្រាប់សកម្មភាពឆ្នាំទី២ និងការប្រមូលមតិ។",
+        "en": "Comprehensive review of Year 1 progress with all key stakeholders, planning for Year 2 activities, and feedback collection."
+      }
+    }
+  ]
+}

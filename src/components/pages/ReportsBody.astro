@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, type Lang } from '../../utils/i18n';
+import ReportCard from '../cards/ReportCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const all = (await getCollection('reports', (e) => e.data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const latest = all.filter((r) => r.data.status !== 'archived' || r.data.order <= 4).slice(0, 4);
+const archive = all.filter((r) => !latest.includes(r));
+---
+
+<div class="space-y-12">
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('reports.latest')}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {latest.map((report) => <ReportCard report={report} lang={lang} />)}
+    </div>
+  </section>
+
+  {archive.length > 0 && (
+    <section>
+      <h2 class="text-2xl font-bold text-primary mb-6">{t('reports.archive')}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {archive.map((report) => <ReportCard report={report} lang={lang} />)}
+      </div>
+    </section>
+  )}
+</div>

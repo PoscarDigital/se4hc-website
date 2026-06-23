@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, type Lang } from '../../utils/i18n';
+import NewsCard from '../cards/NewsCard.astro';
+import EventCard from '../cards/EventCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const articles = (await getCollection('news', (e) => e.data.lang === lang)).sort(
+  (a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0),
+);
+const featured = articles.find((a) => a.data.featured);
+const rest = articles.filter((a) => a !== featured);
+
+const events = (await getCollection('events', (e) => e.data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<div class="space-y-14">
+  {featured && (
+    <section>
+      <h2 class="text-2xl font-bold text-primary mb-6">{t('news.featured')}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <NewsCard article={featured} lang={lang} featured />
+      </div>
+    </section>
+  )}
+
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('news.latest')}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {rest.map((article) => <NewsCard article={article} lang={lang} />)}
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('news.events')}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {events.map((event) => <EventCard event={event} lang={lang} />)}
+    </div>
+  </section>
+</div>

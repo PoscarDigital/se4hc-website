@@ -1,0 +1,76 @@
+---
+import { getLangFromUrl, useTranslations, getRoutePath, getLocalizedPath } from '../../utils/i18n';
+import navigation from '../../data/navigation.json';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const currentRoute = getRoutePath(Astro.url.pathname);
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentRoute === '/';
+  return currentRoute === href || currentRoute.startsWith(`${href}/`);
+}
+---
+
+<nav class="bg-primary shadow-md sticky top-0 z-50">
+  <div class="container">
+    <div class="flex items-center justify-between">
+      <ul class="hidden md:flex list-none m-0 p-0 flex-wrap">
+        {navigation.main.map((item) => (
+          <li>
+            <a
+              href={getLocalizedPath(item.href, lang)}
+              class:list={[
+                'block px-5 py-4 text-white no-underline transition-colors hover:bg-[#1d4ed8]',
+                { 'bg-[#1d4ed8] font-semibold': isActive(item.href) },
+              ]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {t(`nav.${item.key}`)}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Mobile menu toggle -->
+      <button
+        type="button"
+        id="mobile-menu-toggle"
+        class="md:hidden text-white p-4"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <ul id="mobile-menu" class="hidden md:hidden list-none m-0 p-0 pb-2">
+      {navigation.main.map((item) => (
+        <li>
+          <a
+            href={getLocalizedPath(item.href, lang)}
+            class:list={[
+              'block px-5 py-3 text-white no-underline transition-colors hover:bg-[#1d4ed8]',
+              { 'bg-[#1d4ed8] font-semibold': isActive(item.href) },
+            ]}
+          >
+            {t(`nav.${item.key}`)}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+  });
+</script>

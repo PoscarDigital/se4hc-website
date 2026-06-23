@@ -1,0 +1,43 @@
+---
+import { useTranslations, getLocalizedPath, type Lang } from '../../utils/i18n';
+import navigation from '../../data/navigation.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const descriptions: Record<string, string> = {
+  reports: lang === 'km'
+    ? 'ចូលដំណើរការការធ្វើបច្ចុប្បន្នភាពវឌ្ឍនភាព របាយការណ៍ហិរញ្ញវត្ថុ និងទិន្នន័យសមិទ្ធផល'
+    : 'Access progress updates, financial reports, and performance data',
+  resources: lang === 'km'
+    ? 'មគ្គុទ្ទេសក៍អនុវត្ត សម្ភារៈបណ្តុះបណ្តាល និងឯកសារបច្ចេកទេស'
+    : 'Implementation guides, training materials, and technical documents',
+  news: lang === 'km'
+    ? 'ការវិវឌ្ឍថ្មីៗ ការប្រកាស និងព្រឹត្តិការណ៍នាពេលខាងមុខ'
+    : 'Recent developments, announcements, and upcoming events',
+  procurement: lang === 'km'
+    ? 'ឱកាសបច្ចុប្បន្ន ព័ត៌មានដេញថ្លៃ និងនីតិវិធី'
+    : 'Current opportunities, bidding information, and procedures',
+};
+---
+
+<section class="bg-background py-16">
+  <div class="container">
+    <h3 class="section-title">{t('home.quickAccess')}</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {navigation.quickLinks.map((link) => (
+        <div class="card card-hover text-center">
+          <h4 class="text-primary font-bold text-lg mb-3">{t(`nav.${link.key}`)}</h4>
+          <p class="text-gray-600 text-sm mb-4">{descriptions[link.key]}</p>
+          <a href={getLocalizedPath(link.href, lang)} class="text-secondary font-bold no-underline hover:text-primary">
+            {t('common.viewDetails')} →
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

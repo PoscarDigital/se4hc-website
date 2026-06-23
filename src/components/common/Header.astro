@@ -1,0 +1,35 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../utils/i18n';
+import { asset } from '../../utils/helpers';
+import Navigation from './Navigation.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import partners from '../../data/partners.json';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<header class="bg-gradient-to-br from-primary to-secondary text-white py-5">
+  <div class="container">
+    <div class="flex justify-between items-center flex-wrap gap-5">
+      <div class="flex items-center gap-5">
+        <a href={getLocalizedPath('/', lang)} class="shrink-0">
+          <img src={asset('/images/logo.png')} width="72" height="72" alt="SE4HC Logo" class="h-auto" />
+        </a>
+        <div>
+          <h1 class="text-lg md:text-2xl font-bold leading-snug">{t('site.fullTitle')}</h1>
+          <p class="opacity-90 text-sm md:text-base">{t('site.tagline')}</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex gap-3">
+          {partners.partners.slice(0, 2).map((partner) => (
+            <span class="bg-white/10 px-4 py-2 rounded-lg font-bold text-sm">{partner.shortName}</span>
+          ))}
+        </div>
+        <LanguageSwitcher />
+      </div>
+    </div>
+  </div>
+</header>
+<Navigation />

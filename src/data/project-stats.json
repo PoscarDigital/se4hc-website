@@ -1,0 +1,170 @@
+{
+  "overview": [
+    {
+      "key": "totalInvestment",
+      "value": {
+        "km": "$៨៣.៩២ លាន",
+        "en": "$83.92M"
+      },
+      "icon": "currency"
+    },
+    {
+      "key": "schools",
+      "value": {
+        "km": "២៥៩",
+        "en": "259"
+      },
+      "icon": "school"
+    },
+    {
+      "key": "classrooms",
+      "value": {
+        "km": "៤១៤",
+        "en": "414"
+      },
+      "icon": "classroom"
+    },
+    {
+      "key": "teachers",
+      "value": {
+        "km": "៣,០០០+",
+        "en": "3,000+"
+      },
+      "icon": "teacher"
+    }
+  ],
+  "progress": [
+    {
+      "key": "physicalProgress",
+      "label": {
+        "km": "វឌ្ឍនភាពរូបវន្ត",
+        "en": "Physical Progress"
+      },
+      "value": "6.0%",
+      "target": "13.0%"
+    },
+    {
+      "key": "contractsAwarded",
+      "label": {
+        "km": "កិច្ចសន្យាដែលបានផ្តល់",
+        "en": "Contracts Awarded"
+      },
+      "value": "13",
+      "amount": "$901,264"
+    },
+    {
+      "key": "disbursement",
+      "label": {
+        "km": "ការចំណាយ",
+        "en": "Disbursement"
+      },
+      "value": "$1.16M",
+      "percentage": "1.45%"
+    },
+    {
+      "key": "schoolsAssessed",
+      "label": {
+        "km": "សាលាបានវាយតម្លៃ",
+        "en": "Schools Assessed"
+      },
+      "value": "245",
+      "total": "259"
+    }
+  ],
+  "outputs": [
+    {
+      "id": 1,
+      "title": {
+        "km": "ពង្រីកលទ្ធភាពទទួលបានការអប់រំមធ្យមសិក្សាទុតិយភូមិប្រកបដោយគុណភាព",
+        "en": "Access to quality upper secondary education expanded"
+      },
+      "description": {
+        "km": "សាងសង់បន្ទប់រៀនថ្មី ៤១៤ បន្ទប់ មន្ទីរពិសោធន៍វិទ្យាសាស្រ្ត ១៤០ បន្ទប់កុំព្យូទ័រ ១១១",
+        "en": "Construct 414 new classrooms, 140 science labs, 111 computer labs"
+      }
+    },
+    {
+      "id": 2,
+      "title": {
+        "km": "ធ្វើឱ្យប្រសើរឡើងនូវការតម្រឹមអប់រំមធ្យមសិក្សាទុតិយភូមិជាមួយជំនាញសតវត្សទី២១",
+        "en": "Upper secondary education alignment with 21st-century skills improved"
+      },
+      "description": {
+        "km": "បណ្តុះបណ្តាល CPD សម្រាប់គ្រូវិទ្យាសាស org និងគណិតវិទ្យា ៣០០០ នាក់ ផ្តល់សញ្ញាបត្រអនុបណ្ឌិតសម្រាប់គ្រូ ២៥០ នាក់",
+        "en": "Provide CPD training to 3,000 Science and Math teachers, Master's degrees for 250 teachers"
+      }
+    },
+    {
+      "id": 3,
+      "title": {
+        "km": "ធ្វើឱ្យប្រសើរឡើងនូវគុណភាពនៃប្រព័ន្ធវាយតម្លៃការសិក្សាមធ្យមសិក្សាទុតិយភូមិ",
+        "en": "Quality of upper secondary education learning assessment system improved"
+      },
+      "description": {
+        "km": "ពង្រឹងការវាយតម្លៃថ្នាក់សាលាដោយបញ្ចូលជំនាញសតវត្សទី២១",
+        "en": "Strengthen school-level assessment incorporating 21st century skills"
+      }
+    },
+    {
+      "id": 4,
+      "title": {
+        "km": "ពង្រឹងផ្លូវអប់រំក្រោយមធ្យមសិក្សា",
+        "en": "Post-secondary education pathways strengthened"
+      },
+      "description": {
+        "km": "គាំទ្រការដំណើរការមជ្ឈមណ្ឌលវិទ្យាសាស្រ្ត និងបច្ចេកវិទ្យាកម្ពុជា បង្កើតមជ្ឈមណ្ឌលទិន្នន័យអប់រំ",
+        "en": "Support Cambodia Science and Technology Center, establish Education Data Center"
+      }
+    }
+  ],
+  "infrastructure": [
+    {
+      "key": "classrooms",
+      "value": 414,
+      "label": {
+        "km": "បន្ទប់រៀនថ្មី និងកន្លែងលាងដៃ",
+        "en": "New classrooms with WASH facilities"
+      }
+    },
+    {
+      "key": "scienceLabs",
+      "value": 140,
+      "label": {
+        "km": "មន្ទីរពិសោធន៍វិទ្យាសាស្រ្តដែលបានធ្វើឱ្យប្រសើរ",
+        "en": "Upgraded science laboratories"
+      }
+    },
+    {
+      "key": "computerLabs",
+      "value": 111,
+      "label": {
+        "km": "បន្ទប់កុំព្យូទ័រ",
+        "en": "Computer labs"
+      }
+    },
+    {
+      "key": "smartClassrooms",
+      "value": 110,
+      "label": {
+        "km": "បន្ទប់រៀនឆ្លាត",
+        "en": "Smart classrooms"
+      }
+    },
+    {
+      "key": "solarSchools",
+      "value": 90,
+      "label": {
+        "km": "សាលាដែលមានប្រព័ន្ធសូឡា",
+        "en": "Schools with solar panels"
+      }
+    },
+    {
+      "key": "internetSchools",
+      "value": 123,
+      "label": {
+        "km": "សាលាដែលមានអ៊ីនធឺណិត",
+        "en": "Schools with intranet"
+      }
+    }
+  ]
+}

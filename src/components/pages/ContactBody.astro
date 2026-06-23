@@ -1,0 +1,52 @@
+---
+import { useTranslations, type Lang } from '../../utils/i18n';
+import { localize } from '../../utils/helpers';
+import contacts from '../../data/contacts.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const people = [contacts.primary, contacts.manager];
+---
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+  <!-- Office -->
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('contact.office')}</h2>
+    <div class="card space-y-3 text-gray-700">
+      <p><strong>{t('common.address')}:</strong><br />{contacts.office.address[lang]}</p>
+      <p><strong>{t('common.phone')}:</strong> {contacts.office.phone}</p>
+      <p>
+        <strong>{t('common.email')}:</strong>
+        <a href={`mailto:${contacts.office.email}`} class="text-secondary hover:underline">{contacts.office.email}</a>
+      </p>
+      <p>
+        <strong>{t('common.website')}:</strong>
+        <a href={contacts.office.website} target="_blank" rel="noopener" class="text-secondary hover:underline">
+          {contacts.office.website}
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section>
+    <h2 class="text-2xl font-bold text-primary mb-6">{t('contact.team')}</h2>
+    <div class="space-y-4">
+      {people.map((p) => (
+        <div class="card">
+          <h3 class="font-bold text-primary">{localize(p.name, lang)}</h3>
+          <p class="text-gray-600 text-sm mb-2">{localize(p.title, lang)}</p>
+          <p class="text-gray-600 text-sm">
+            {t('common.phone')}: {p.phone}<br />
+            {t('common.email')}: <a href={`mailto:${p.email}`} class="text-secondary hover:underline">{p.email}</a>
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+</div>
