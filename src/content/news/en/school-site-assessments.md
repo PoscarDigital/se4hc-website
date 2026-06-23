@@ -5,7 +5,6 @@ date: 2025-12-15
 category: Infrastructure
 featured: true
 excerpt: Comprehensive site assessments have been completed for 245 secondary schools across Cambodia, paving the way for classroom construction, science labs, computer labs, and WASH facilities under the SE4HC project infrastructure component.
-featureImage: /images/news/project-photo.jpg
 featureImageAlt: "SE4HC school site assessment field visit"
 ---
 
