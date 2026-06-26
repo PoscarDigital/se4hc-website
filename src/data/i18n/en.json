@@ -1,8 +1,8 @@
 {
   "site": {
     "title": "SE4HC Project",
-    "fullTitle": "Secondary Education for Human Capital Competitiveness",
-    "tagline": "Building Cambodia's Future Through Quality Education"
+    "fullTitle": "Secondary Education for Human Capital Competitiveness Project",
+    "tagline": "High-Quality Human Resources for Knowledge-based Society developed"
   },
   "nav": {
     "home": "Home",
@@ -56,8 +56,14 @@
     "heroTitle": "SE4HC Project",
     "heroSubtitle": "Supporting priorities of phase 2 of Cambodia's Secondary Education Blueprint (CAMSEB) 2030. The project's impact is aligned with the government's Pentagonal Strategy to develop high-quality human resources for a knowledge-based society.",
     "heroCta": "Learn More About SE4HC",
+    "galleryTitle": "Project Activities",
+    "galleryIntro": "Highlights from project activities across schools and communities.",
+    "videoTitle": "Project Video",
+    "videoIntro": "Watch an overview of the SE4HC project.",
+    "videoPlaceholder": "Project video coming soon.",
     "overviewTitle": "Project Overview",
-    "overviewIntro": "The SE4HC project will support priorities of phase 2 of Cambodia's Secondary Education Blueprint (CAMSEB) 2030, focusing on infrastructure development, capacity building, and system improvement.",
+    "overviewIntro": "The Secondary Education for Human Capital Competitiveness Project (SE4HC) will support priorities of phase 2 of Cambodia's Secondary Education Blueprint (CAMSEB) 2030. The project's impact is aligned with the government's Pentagonal Strategy and CAMSEB which highlight the importance of high-quality human resources to develop a knowledge-based society. The outcome will be effectiveness of a gender-inclusive upper secondary education system improved.",
+    "overviewFinancing": "The project is estimated to cost $83.92 million, to be financed with a concessional loan of $80.00 million from ADB and government counterpart financing of $3.92 million.",
     "quickAccess": "Quick Access",
     "infraTitle": "Infrastructure Development",
     "infraText": "Construct 414 additional classrooms, upgrade existing facilities with modern labs, libraries, and smart classrooms across 259 secondary schools.",
@@ -73,11 +79,14 @@
     "overviewText": "The Secondary Education for Human Capital Competitiveness (SE4HC) project will support priorities of phase 2 of Cambodia's Secondary Education Blueprint (CAMSEB) 2030. The project's impact is aligned with the government's Pentagonal Strategy to develop high-quality human resources for a knowledge-based society.",
     "rationale": "Project Rationale",
     "rationaleText": "Persistent constraints in secondary education include: (i) low access and completion, (ii) poor alignment with 21st century skills and employability skills, (iii) inadequate effective learning assessment system, and (iv) lack of clear alignment and flexibility between secondary and post-secondary education pathways.",
+    "rationaleText2": "To address these challenges, the project will employ a STEM-innovative approach, systematic institutional and capacity building, teacher qualification upgrading, and the provision of climate-resilient and digital school infrastructure and facilities. This project is aligned with the CAMSEB 2030 and the Education Strategic Plan 2023-2028, which prioritizes equitable access to quality education and seeks to overcome the aforementioned constraints.",
+    "rationaleText3": "Furthermore, it strongly supports the national digital education strategy for schools by building a conducive digital environment, enhancing digital literacy for both students and teachers, and promoting online learning opportunities. As such, the project is closely aligned with the government's Pentagonal Strategy to enhance the quality of education, science, technology, and technical skills.",
     "approachTitle": "STEM-Innovative Approach",
     "components": "Key Components",
-    "infraDev": "Infrastructure Development",
-    "capacityDev": "Capacity Development",
+    "infraDev": "Infrastructure",
+    "capacityDev": "Capacity Development and System Improvement",
     "systemImprovement": "System Improvement",
+    "inclusiveEducation": "Inclusive Education",
     "outcomes": "Expected Outcomes",
     "structure": "Project Management Structure",
     "structureText": "The SE4HC project is implemented through a coordinated management structure under the Ministry of Education, Youth and Sport (MoEYS), with the Institute of Technology of Cambodia (ITC) serving as the Implementing Agency.",

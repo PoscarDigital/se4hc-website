@@ -1,6 +1,8 @@
 ---
 import { useTranslations, type Lang } from '../../utils/i18n';
 import HeroSection from '../sections/HeroSection.astro';
+import GallerySection from '../sections/GallerySection.astro';
+import VideoSection from '../sections/VideoSection.astro';
 import StatsGrid from '../sections/StatsGrid.astro';
 import QuickLinks from '../sections/QuickLinks.astro';
 
@@ -20,11 +22,14 @@ const overview = [
 
 <HeroSection lang={lang} />
 
+<GallerySection lang={lang} />
+
 <section class="py-16">
   <div class="container">
     <div class="bg-white rounded-2xl shadow-lg p-8 md:p-10 mb-12">
       <h3 class="section-title">{t('home.overviewTitle')}</h3>
-      <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">{t('home.overviewIntro')}</p>
+      <p class="text-center text-gray-600 max-w-3xl mx-auto mb-4">{t('home.overviewIntro')}</p>
+      <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">{t('home.overviewFinancing')}</p>
       <StatsGrid lang={lang} />
     </div>
 
@@ -38,5 +43,7 @@ const overview = [
     </div>
   </div>
 </section>
+
+<VideoSection lang={lang} />
 
 <QuickLinks lang={lang} />

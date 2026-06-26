@@ -1,0 +1,54 @@
+---
+import { useTranslations, type Lang } from '../../utils/i18n';
+import gallery from '../../data/gallery.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const video = gallery.video;
+
+// Accept a full YouTube URL (watch?v=, youtu.be/, /embed/) or a bare 11-char video ID.
+function youtubeId(input: string): string {
+  if (!input) return '';
+  const url = input.trim();
+  const match = url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/);
+  if (match) return match[1];
+  return /^[A-Za-z0-9_-]{11}$/.test(url) ? url : '';
+}
+
+const ytId = youtubeId(video.youtube);
+const hasYoutube = !!ytId;
+const hasFile = !!video.src;
+---
+
+<section class="bg-background py-16">
+  <div class="container">
+    <h3 class="section-title">{t('home.videoTitle')}</h3>
+    <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">{t('home.videoIntro')}</p>
+
+    <div class="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg bg-primary aspect-video">
+      {hasYoutube ? (
+        <iframe
+          class="w-full h-full"
+          src={`https://www.youtube-nocookie.com/embed/${ytId}`}
+          title={t('home.videoTitle')}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      ) : hasFile ? (
+        <video class="w-full h-full" controls preload="metadata" poster={video.poster}>
+          <source src={video.src} type="video/mp4" />
+        </video>
+      ) : (
+        <div class="w-full h-full flex flex-col items-center justify-center text-white text-center px-6">
+          <span class="text-6xl mb-4">▶</span>
+          <p class="text-lg opacity-90">{t('home.videoPlaceholder')}</p>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

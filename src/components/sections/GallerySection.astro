@@ -1,0 +1,85 @@
+---
+import { useTranslations, type Lang } from '../../utils/i18n';
+import gallery from '../../data/gallery.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const slides = gallery.slides;
+---
+
+<section class="py-16">
+  <div class="container">
+    <h3 class="section-title">{t('home.galleryTitle')}</h3>
+    <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">{t('home.galleryIntro')}</p>
+
+    <div
+      class="relative max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg bg-primary"
+      data-slideshow
+    >
+      <div class="relative aspect-video">
+        {slides.map((slide, i) => (
+          <figure
+            class:list={['absolute inset-0 m-0 transition-opacity duration-700', i === 0 ? 'opacity-100' : 'opacity-0']}
+            data-slide
+            data-index={i}
+          >
+            <img src={slide.src} alt={slide.caption[lang]} class="w-full h-full object-cover" loading={i === 0 ? 'eager' : 'lazy'} />
+            <figcaption class="absolute bottom-0 inset-x-0 bg-black/40 text-white text-sm md:text-base px-4 py-2">
+              {slide.caption[lang]}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      {slides.length > 1 && (
+        <>
+          <button type="button" data-prev aria-label="Previous slide"
+            class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-primary font-bold text-xl flex items-center justify-center shadow">‹</button>
+          <button type="button" data-next aria-label="Next slide"
+            class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-primary font-bold text-xl flex items-center justify-center shadow">›</button>
+          <div class="absolute bottom-3 inset-x-0 flex justify-center gap-2">
+            {slides.map((_, i) => (
+              <button type="button" data-dot data-index={i} aria-label={`Go to slide ${i + 1}`}
+                class:list={['w-2.5 h-2.5 rounded-full transition-colors', i === 0 ? 'bg-white' : 'bg-white/50']}></button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-slideshow]').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll('[data-slide]'));
+    const dots = Array.from(root.querySelectorAll('[data-dot]'));
+    if (slides.length < 2) return;
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    const show = (n: number) => {
+      current = (n + slides.length) % slides.length;
+      slides.forEach((s, i) => {
+        s.classList.toggle('opacity-100', i === current);
+        s.classList.toggle('opacity-0', i !== current);
+      });
+      dots.forEach((d, i) => {
+        d.classList.toggle('bg-white', i === current);
+        d.classList.toggle('bg-white/50', i !== current);
+      });
+    };
+
+    const start = () => { timer = setInterval(() => show(current + 1), 5000); };
+    const reset = () => { clearInterval(timer); start(); };
+
+    root.querySelector('[data-next]')?.addEventListener('click', () => { show(current + 1); reset(); });
+    root.querySelector('[data-prev]')?.addEventListener('click', () => { show(current - 1); reset(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => { show(i); reset(); }));
+
+    start();
+  });
+</script>

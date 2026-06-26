@@ -18,7 +18,7 @@ const about = pageContent.about;
 const components = [
   { title: t('about.infraDev'), items: about.components.infrastructure[lang] },
   { title: t('about.capacityDev'), items: about.components.capacity[lang] },
-  { title: t('about.systemImprovement'), items: about.components.system[lang] },
+  { title: t('about.inclusiveEducation'), items: about.components.inclusive[lang] },
 ];
 
 const admin = [
@@ -40,7 +40,9 @@ const admin = [
   <!-- Rationale -->
   <section class="bg-background rounded-2xl p-8">
     <h2 class="text-2xl font-bold text-primary mb-4">{t('about.rationale')}</h2>
-    <p class="text-gray-700 mb-6">{t('about.rationaleText')}</p>
+    <p class="text-gray-700 mb-4">{t('about.rationaleText')}</p>
+    <p class="text-gray-700 mb-4">{t('about.rationaleText2')}</p>
+    <p class="text-gray-700 mb-6">{t('about.rationaleText3')}</p>
     <h3 class="text-lg font-bold text-secondary mb-3">{t('about.approachTitle')}</h3>
     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 list-none p-0 m-0">
       {about.rationaleApproach[lang].map((item) => (

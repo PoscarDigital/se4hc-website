@@ -1,0 +1,13 @@
+{
+  "_comment_video": "Set EITHER 'youtube' (full URL or 11-char ID, takes priority) OR 'src' (local file path under public/, e.g. /documents/videos/overview.mp4). Leave both empty to show the placeholder.",
+  "video": {
+    "src": "",
+    "youtube": "",
+    "poster": "/images/gallery/placeholder-1.svg"
+  },
+  "slides": [
+    { "src": "/images/gallery/placeholder-1.svg", "caption": { "km": "សកម្មភាពគម្រោង", "en": "Project activity" } },
+    { "src": "/images/gallery/placeholder-2.svg", "caption": { "km": "សកម្មភាពគម្រោង", "en": "Project activity" } },
+    { "src": "/images/gallery/placeholder-3.svg", "caption": { "km": "សកម្មភាពគម្រោង", "en": "Project activity" } }
+  ]
+}
