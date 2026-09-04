@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { inLang } from '../../utils/content';
 import { useTranslations, type Lang } from '../../utils/i18n';
 import { localize } from '../../utils/helpers';
 import ResourceCard from '../cards/ResourceCard.astro';
@@ -13,7 +14,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const res = pageContent.resources;
 
-const featured = (await getCollection('resources', (e) => e.data.lang === lang)).sort(
+const featured = (await getCollection('resources', inLang(lang))).sort(
   (a, b) => a.data.order - b.data.order,
 );
 ---

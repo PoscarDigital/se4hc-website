@@ -1,11 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { inLang } from '../../utils/content';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 import { useTranslations } from '../../utils/i18n';
 import { formatCurrency, entrySlug } from '../../utils/helpers';
 
 export async function getStaticPaths() {
-  const items = await getCollection('procurement', (e) => e.data.lang === 'km');
+  const items = await getCollection('procurement', inLang('km'));
   return items.map((item) => ({
     params: { slug: entrySlug(item.id) },
     props: { item },

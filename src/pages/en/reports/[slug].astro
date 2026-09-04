@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { inLang } from '../../../utils/content';
 import ContentLayout from '../../../layouts/ContentLayout.astro';
 import { useTranslations } from '../../../utils/i18n';
 import { formatDate, entrySlug } from '../../../utils/helpers';
@@ -8,7 +9,7 @@ import FeatureImage from '../../../components/media/FeatureImage.astro';
 import AttachmentList from '../../../components/media/AttachmentList.astro';
 
 export async function getStaticPaths() {
-  const reports = await getCollection('reports', (e) => e.data.lang === 'en');
+  const reports = await getCollection('reports', inLang('en'));
   return reports.map((report) => ({
     params: { slug: entrySlug(report.id) },
     props: { report },

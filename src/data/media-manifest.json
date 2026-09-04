@@ -1,0 +1,4 @@
+{
+  "_comment": "Written by the admin portal (services/admin) on every upload. Maps a stored file reference to metadata the static build cannot derive on its own — a remote object cannot be stat'd at build time. Repo-local files under public/ are stat'd directly and need no entry here. Do not edit by hand.",
+  "files": {}
+}

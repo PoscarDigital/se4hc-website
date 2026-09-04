@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { inLang } from '../../utils/content';
 import { useTranslations, type Lang } from '../../utils/i18n';
 import { localize } from '../../utils/helpers';
 import ProcurementCard from '../cards/ProcurementCard.astro';
@@ -13,7 +14,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const proc = pageContent.procurement;
 
-const awards = (await getCollection('procurement', (e) => e.data.lang === lang)).sort(
+const awards = (await getCollection('procurement', inLang(lang))).sort(
   (a, b) => a.data.order - b.data.order,
 );
 ---

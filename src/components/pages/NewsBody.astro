@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { inLang } from '../../utils/content';
 import { useTranslations, type Lang } from '../../utils/i18n';
 import NewsCard from '../cards/NewsCard.astro';
 import EventCard from '../cards/EventCard.astro';
@@ -11,13 +12,13 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const articles = (await getCollection('news', (e) => e.data.lang === lang)).sort(
+const articles = (await getCollection('news', inLang(lang))).sort(
   (a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0),
 );
 const featured = articles.find((a) => a.data.featured);
 const rest = articles.filter((a) => a !== featured);
 
-const events = (await getCollection('events', (e) => e.data.lang === lang)).sort(
+const events = (await getCollection('events', inLang(lang))).sort(
   (a, b) => a.data.order - b.data.order,
 );
 ---

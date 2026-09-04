@@ -1,13 +1,14 @@
 import { statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import manifest from '../data/media-manifest.json';
 import type { Lang } from './i18n';
 
 export type AttachmentKind = 'pdf' | 'image' | 'word' | 'excel' | 'powerpoint' | 'archive' | 'video' | 'audio' | 'file';
 
 export interface ResolvedAttachment {
-  /** Path under /public, e.g. /documents/reports/foo.pdf */
+  /** The reference as authored: a path under /public, or an absolute URL. */
   file: string;
-  /** URL honoring the configured base path. */
+  /** URL to link/embed. Absolute for remote files; base-prefixed for repo files. */
   href: string;
   /** Display label (falls back to the file name). */
   label: string;
@@ -16,8 +17,10 @@ export interface ResolvedAttachment {
   kind: AttachmentKind;
   /** Whether the file can be embedded/previewed inline in the browser. */
   viewable: boolean;
-  /** Human-readable size (e.g. "2.3 MB"), or null if the file is missing. */
+  /** Human-readable size (e.g. "2.3 MB"), or null if unknown. */
   size: string | null;
+  /** True when the bytes live in object storage rather than the repo. */
+  remote: boolean;
   featured: boolean;
 }
 
@@ -35,13 +38,29 @@ const EXT_KIND: Record<string, AttachmentKind> = {
 /** Kinds we can render directly in the browser. */
 const VIEWABLE: AttachmentKind[] = ['pdf', 'image', 'video', 'audio'];
 
+const REMOTE = /^https?:\/\//i;
+
+/**
+ * Size/type metadata for files stored outside the repo.
+ *
+ * A remote object cannot be stat'd at build time — the object store is not
+ * necessarily reachable from CI — so the media service records each upload's
+ * metadata here and commits it alongside the content. See services/media.
+ */
+interface ManifestEntry {
+  size?: number;
+  mime?: string;
+  uploadedAt?: string;
+}
+const MANIFEST = (manifest as { files?: Record<string, ManifestEntry> }).files ?? {};
+
 function extOf(file: string): string {
-  const m = file.toLowerCase().match(/\.([a-z0-9]+)(?:\?.*)?$/);
+  const m = file.toLowerCase().split('?')[0].match(/\.([a-z0-9]+)$/);
   return m ? m[1] : '';
 }
 
 function fileNameOf(file: string): string {
-  return decodeURIComponent(file.split('/').pop() ?? file);
+  return decodeURIComponent(file.split('?')[0].split('/').pop() ?? file);
 }
 
 function formatBytes(bytes: number): string {
@@ -57,37 +76,51 @@ function formatBytes(bytes: number): string {
 }
 
 /** Read the on-disk size of a file under /public. Returns null if missing. */
-function sizeOf(file: string): string | null {
+function sizeOnDisk(file: string): number | null {
   try {
     const clean = file.replace(/^\//, '').split('?')[0];
     const url = new URL(`../../public/${clean}`, import.meta.url);
-    const stat = statSync(fileURLToPath(url));
-    return formatBytes(stat.size);
+    return statSync(fileURLToPath(url)).size;
   } catch {
     return null;
   }
 }
 
+/**
+ * Resolve a byte count for an attachment, in order of reliability:
+ * the size recorded in frontmatter, then the media manifest, then the file
+ * on disk. Remote files are never stat'd. Unknown size is not an error.
+ */
+function resolveSize(file: string, declared: number | undefined, remote: boolean): string | null {
+  const bytes = declared ?? MANIFEST[file]?.size ?? (remote ? null : sizeOnDisk(file));
+  return typeof bytes === 'number' ? formatBytes(bytes) : null;
+}
+
 export interface RawAttachment {
+  /** Path under /public (e.g. /documents/reports/foo.pdf) or an absolute URL. */
   file: string;
   label?: string;
   featured?: boolean;
+  /** Size in bytes, recorded at upload time for files not in the repo. */
+  size?: number;
 }
 
 /** Resolve a raw frontmatter attachment into render-ready metadata. */
 export function resolveAttachment(raw: RawAttachment, base: string): ResolvedAttachment {
+  const remote = REMOTE.test(raw.file);
   const ext = extOf(raw.file);
   const kind = EXT_KIND[ext] ?? 'file';
   const cleanBase = base.replace(/\/$/, '');
   const path = raw.file.startsWith('/') ? raw.file : `/${raw.file}`;
   return {
     file: raw.file,
-    href: `${cleanBase}${path}`,
+    href: remote ? raw.file : `${cleanBase}${path}`,
     label: raw.label ?? fileNameOf(raw.file),
     ext: ext.toUpperCase(),
     kind,
     viewable: VIEWABLE.includes(kind),
-    size: sizeOf(raw.file),
+    size: resolveSize(raw.file, raw.size, remote),
+    remote,
     featured: raw.featured ?? false,
   };
 }

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { inLang } from '../../utils/content';
 import { useTranslations, type Lang } from '../../utils/i18n';
 import ReportCard from '../cards/ReportCard.astro';
 
@@ -10,7 +11,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const all = (await getCollection('reports', (e) => e.data.lang === lang)).sort(
+const all = (await getCollection('reports', inLang(lang))).sort(
   (a, b) => a.data.order - b.data.order,
 );
 const latest = all.filter((r) => r.data.status !== 'archived' || r.data.order <= 4).slice(0, 4);

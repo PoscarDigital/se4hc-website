@@ -48,8 +48,14 @@ export function entrySlug(id: string): string {
   return id.replace(/^(km|en)\//, '').replace(/\.(md|mdx)$/, '');
 }
 
-/** Resolve a public asset path, honoring the configured base path. */
+/**
+ * Resolve an asset reference for use in markup.
+ *
+ * Absolute URLs (files served from object storage) are returned untouched;
+ * repo-relative paths are prefixed with the configured base path.
+ */
 export function asset(path: string): string {
+  if (/^https?:\/\//i.test(path)) return path;
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const clean = path.startsWith('/') ? path : `/${path}`;
   return `${base}${clean}`;

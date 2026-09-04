@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { inLang } from '../../utils/content';
 import { useTranslations, type Lang } from '../../utils/i18n';
 import FAQAccordion from '../sections/FAQAccordion.astro';
 import contacts from '../../data/contacts.json';
@@ -11,7 +12,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const faqs = (await getCollection('faqs', (e) => e.data.lang === lang)).sort(
+const faqs = (await getCollection('faqs', inLang(lang))).sort(
   (a, b) => a.data.order - b.data.order,
 );
 

@@ -6,7 +6,8 @@ import { defineCollection, z } from 'astro:content';
  * Every collection shares the same base set of frontmatter fields so authoring
  * and rendering a Markdown entry is consistent no matter the collection:
  *
- *   lang*            "km" | "en"            (required)
+ *   lang             "km" | "en"            (optional, legacy — the language is derived
+ *                                            from the folder; see utils/content.ts)
  *   title*           string                 (required — the entry heading; FAQs use it as the question)
  *   excerpt          string                 short summary / teaser / answer-lead
  *   date             date                   publication / updated date (ISO: YYYY-MM-DD)
@@ -22,7 +23,16 @@ import { defineCollection, z } from 'astro:content';
  * is identical everywhere.
  */
 
-const langField = z.enum(['km', 'en']);
+/**
+ * Legacy frontmatter language tag.
+ *
+ * The folder an entry lives in (`<collection>/km/` or `<collection>/en/`) is the
+ * authoritative language — see `langOf()` in utils/content.ts. This field is kept
+ * optional so existing entries stay valid, but nothing reads it: the CMS has no
+ * clean way to write a different value per locale from one shared form, and a
+ * frontmatter tag that disagrees with the folder is a silent content bug.
+ */
+const langField = z.enum(['km', 'en']).optional();
 
 /** Shared status values across content types (a superset; not every value is meaningful everywhere). */
 const statusField = z
@@ -31,15 +41,23 @@ const statusField = z
 
 /**
  * A downloadable / viewable file attached to a content entry.
- * `file` is a path under /public (e.g. /documents/reports/foo.pdf).
- * `label` is an optional human-readable name; `featured` marks the primary
- * file (the one embedded/previewed first). Type & size are derived at render
- * time from the file extension and the file on disk.
+ *
+ * `file` is either a path under /public (e.g. /documents/reports/foo.pdf) for a
+ * file committed to the repo, or an absolute URL for one served from object
+ * storage. `label` is an optional human-readable name; `featured` marks the
+ * primary file (the one embedded/previewed first).
+ *
+ * The kind/icon is always derived from the extension. Size is derived from the
+ * file on disk for repo files; for remote files it cannot be — the object store
+ * is not necessarily reachable from CI — so the media service records it here
+ * (and in src/data/media-manifest.json) at upload time.
  */
 const attachmentSchema = z.object({
   file: z.string(),
   label: z.string().optional(),
   featured: z.boolean().default(false),
+  /** Size in bytes, recorded at upload time. Only needed for remote files. */
+  size: z.number().optional(),
 });
 
 /** The identical base every collection schema is built from. */
