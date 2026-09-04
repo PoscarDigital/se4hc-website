@@ -1,0 +1,25 @@
+{
+  "name": "se4hc-admin",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Content admin portal for the SE4HC website. Accounts live in Postgres; all content is read from and written to GitHub.",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node test/logic.test.mjs && node test/boot.test.mjs"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/formbody": "^8.0.2",
+    "@fastify/multipart": "^9.0.3",
+    "@fastify/static": "^8.0.4",
+    "fastify": "^5.2.1",
+    "minio": "^8.0.4",
+    "pg": "^8.13.1",
+    "yaml": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
