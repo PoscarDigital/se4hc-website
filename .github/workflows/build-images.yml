@@ -70,8 +70,6 @@ jobs:
 
   admin:
     runs-on: ubuntu-latest
-    # Only builds once the admin service exists in the repo.
-    if: hashFiles('services/admin/Dockerfile') != ''
     permissions:
       contents: read
       packages: write
