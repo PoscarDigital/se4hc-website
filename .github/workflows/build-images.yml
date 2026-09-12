@@ -54,9 +54,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/se4hc-web
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=sha,format=long
+          # `latest` only. A SHA tag per push would pin every build in GHCR
+          # forever, and private packages on the Free plan get 500 MB.
+          tags: type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -65,8 +65,30 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          # Push a single manifest. Buildx otherwise attaches a provenance
+          # attestation, which makes `latest` an index whose child manifests
+          # show up in GHCR as untagged versions — and the prune step below
+          # would then delete pieces of the image the tag still points at.
+          provenance: false
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      # Moving `latest` leaves the previous manifest behind, untagged. Untagged
+      # versions still count against the package allowance, and when it fills it
+      # is the *push* that fails — CI goes red, no image is published, and the
+      # server keeps serving the old one. So prune on every successful push.
+      #
+      # Two are kept: that is the rollback path now that there are no SHA tags.
+      # `docker images --digests` on the server, or the GHCR versions page, names
+      # a digest to pin: se4hc-web@sha256:... in the stack's .env.
+      - name: Prune untagged versions
+        if: github.event_name != 'pull_request'
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: se4hc-web
+          package-type: container
+          delete-only-untagged-versions: true
+          min-versions-to-keep: 2
 
   admin:
     runs-on: ubuntu-latest
@@ -108,9 +130,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/se4hc-admin
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=sha,format=long
+          # `latest` only. A SHA tag per push would pin every build in GHCR
+          # forever, and private packages on the Free plan get 500 MB.
+          tags: type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -119,5 +141,27 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          # Push a single manifest. Buildx otherwise attaches a provenance
+          # attestation, which makes `latest` an index whose child manifests
+          # show up in GHCR as untagged versions — and the prune step below
+          # would then delete pieces of the image the tag still points at.
+          provenance: false
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      # Moving `latest` leaves the previous manifest behind, untagged. Untagged
+      # versions still count against the package allowance, and when it fills it
+      # is the *push* that fails — CI goes red, no image is published, and the
+      # server keeps serving the old one. So prune on every successful push.
+      #
+      # Two are kept: that is the rollback path now that there are no SHA tags.
+      # `docker images --digests` on the server, or the GHCR versions page, names
+      # a digest to pin: se4hc-admin@sha256:... in the stack's .env.
+      - name: Prune untagged versions
+        if: github.event_name != 'pull_request'
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: se4hc-admin
+          package-type: container
+          delete-only-untagged-versions: true
+          min-versions-to-keep: 2

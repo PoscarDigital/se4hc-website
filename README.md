@@ -95,9 +95,17 @@ See that repository's README for first-time setup, backups and rollback.
 2. `npm run build` — `astro check` plus the static build
 3. Build and push `ghcr.io/<owner>/se4hc-web`
 4. Test and push `ghcr.io/<owner>/se4hc-admin`
+5. Prune the manifests the moved tag left untagged
 
-Images are tagged `latest` and with the full commit SHA, so a rollback is a tag change.
 Pull requests run steps 1–2 without publishing.
+
+**Only `latest` is published.** A SHA tag per push would keep every build in GHCR
+forever, and private packages on the organisation's Free plan share a 500 MB
+allowance — when it fills, the *push* fails, so CI goes red and nothing deploys.
+Each push therefore moves `latest` and step 5 deletes the manifests that move
+orphaned, keeping the two most recent. Those two are the rollback path — the
+deployment stacks take one full image reference each, so a rollback pins
+`…/se4hc-web@sha256:…` instead of a tag. See *Rolling back* in that repository.
 
 **Bad content cannot reach production**: a schema violation fails step 2, no image is
 published, and the server keeps serving the last good one.
