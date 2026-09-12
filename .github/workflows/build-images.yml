@@ -20,6 +20,65 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Which parts of the repo this event touched. The admin image is built from
+  # services/admin alone, so the usual push — an editor saving content — has no
+  # reason to rebuild it. Private repositories draw on the organisation's monthly
+  # Actions minutes, and this is the cheapest two minutes to stop spending.
+  #
+  # Asked through the API rather than by diffing a checkout: no clone is needed,
+  # and there is no shallow-fetch depth to get wrong. Note that a job-level `if`
+  # cannot do this itself — see the hashFiles() lesson in 5463149 — so the answer
+  # has to come from a job output.
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      admin: ${{ steps.decide.outputs.admin }}
+    steps:
+      - name: Decide whether the admin changed
+        id: decide
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          PR: ${{ github.event.pull_request.number }}
+        # Fail open. Every branch that cannot name the changed files builds
+        # anyway: two wasted minutes is a far better outcome than skipping a real
+        # change and leaving the server pulling a `latest` that never moved.
+        run: |
+          set -uo pipefail
+          build() { echo "admin=true"  >> "$GITHUB_OUTPUT"; echo "-> building the admin"; exit 0; }
+          skip()  { echo "admin=false" >> "$GITHUB_OUTPUT"; echo "-> skipping the admin"; exit 0; }
+
+          if [ "$EVENT" = workflow_dispatch ]; then
+            echo "Manual run: no diff to inspect."; build
+          fi
+
+          if [ -n "$PR" ]; then
+            files=$(gh api --paginate "repos/$REPO/pulls/$PR/files" --jq '.[].filename')
+          elif [ -n "$BEFORE" ] && [ "$BEFORE" != 0000000000000000000000000000000000000000 ]; then
+            files=$(gh api "repos/$REPO/compare/$BEFORE...$AFTER" --jq '.files[].filename')
+          else
+            echo "No base commit to compare against (a branch's first push)."; build
+          fi
+
+          if [ -z "${files:-}" ]; then
+            echo "The API returned no file list."; build
+          fi
+
+          echo "Changed files:"; echo "$files" | sed 's/^/  /'
+
+          # The workflow file counts: a change to how the admin is built or
+          # tested has to reach the image it produces.
+          if echo "$files" | grep -qE '^(services/admin/|\.github/workflows/build-images\.yml$)'; then
+            build
+          fi
+          skip
+
   website:
     runs-on: ubuntu-latest
     permissions:
@@ -92,6 +151,8 @@ jobs:
 
   admin:
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.admin == 'true'
     permissions:
       contents: read
       packages: write
