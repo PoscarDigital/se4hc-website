@@ -91,23 +91,34 @@ See that repository's README for first-time setup, backups and rollback.
 
 `.github/workflows/build-images.yml` runs on every push to `main`:
 
-1. Check every entry exists in both languages
-2. `npm run build` — `astro check` plus the static build
-3. Build and push `ghcr.io/<owner>/se4hc-web`
-4. Test and push `ghcr.io/<owner>/se4hc-admin`
-5. Prune the manifests the moved tag left untagged
+1. Work out which parts of the repo the push touched
+2. Check every entry exists in both languages
+3. `npm run build` — `astro check` plus the static build
+4. Build and push `ghcr.io/<owner>/se4hc-web`
+5. Test and push `ghcr.io/<owner>/se4hc-admin` — **only if `services/admin/`
+   changed**, since nothing else can affect that image
+6. Prune the manifests each moved tag left untagged
 
-Pull requests run steps 1–2 without publishing.
+Pull requests run steps 2–3 without publishing.
+
+**The admin is rebuilt only when its own source changed.** A content save is the
+usual push and cannot affect the portal's image, so rebuilding it would spend
+two minutes of the organisation's monthly Actions allowance for an identical
+result. The workflow file itself counts as an admin change, so edits to how it is
+built or tested still reach the image, and anything that cannot name its changed
+files — a manual dispatch, a branch's first push — builds regardless. When the
+job skips, `se4hc-admin:latest` simply stays where it is and `update.sh admin`
+finds nothing to pull.
 
 **Only `latest` is published.** A SHA tag per push would keep every build in GHCR
 forever, and private packages on the organisation's Free plan share a 500 MB
 allowance — when it fills, the *push* fails, so CI goes red and nothing deploys.
-Each push therefore moves `latest` and step 5 deletes the manifests that move
+Each push therefore moves `latest` and step 6 deletes the manifests that move
 orphaned, keeping the two most recent. Those two are the rollback path — the
 deployment stacks take one full image reference each, so a rollback pins
 `…/se4hc-web@sha256:…` instead of a tag. See *Rolling back* in that repository.
 
-**Bad content cannot reach production**: a schema violation fails step 2, no image is
+**Bad content cannot reach production**: a schema violation fails step 3, no image is
 published, and the server keeps serving the last good one.
 
 ---
