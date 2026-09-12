@@ -124,13 +124,24 @@ DATABASE_URL=postgres://x@localhost/x AUTH_SECRET=x GITHUB_TOKEN=x npm test
 ```
 
 ```
-34 passed, 0 failed
-OK: module graph links, routes register, guards work.
+48 passed, 0 failed
+
+--- mounted at / ---
+OK: module graph links, routes register, guards work, mount point holds (/).
+
+--- mounted at /admin ---
+OK: module graph links, routes register, guards work, mount point holds (/admin).
 ```
 
 The dummy values are deliberate — this suite covers frontmatter round-tripping
 (including Khmer), form parsing, type coercion, the route tree and the auth
 guards, none of which touch Postgres or GitHub.
+
+The boot suite runs twice because production serves the portal at
+`https://se4hc.moeys.gov.kh/admin` rather than on its own hostname. The second
+run sets `BASE_PATH=/admin` and asserts that no link, redirect, cookie or asset
+escapes the prefix — the failure that would otherwise reach an editor as a 404 on
+the public site.
 
 ---
 
@@ -183,6 +194,13 @@ export STORAGE_DRIVER="github"              # no MinIO needed
 export PORT=3000
 
 npm run dev        # node --watch, restarts on save
+```
+
+Leave `BASE_PATH` unset and the portal owns the origin, which is the comfortable
+way to work on it. Set it to reproduce what the server does:
+
+```bash
+export BASE_PATH="/admin"      # then browse to http://localhost:3000/admin
 ```
 
 A healthy start looks like this:
@@ -260,40 +278,44 @@ scratch environment.
 
 ## 4. The whole thing in Docker
 
-Use this to test what actually ships — the real images, the real nginx config —
-before pushing. It lives in the sibling deployment repo.
+Use this to test what actually ships — the real images, the real nginx routing, the
+portal on the path production serves it from. It lives in the sibling deployment
+repo.
 
 ```bash
 cd ../se4hc-deployment
-
-./scripts/build-local.sh ../se4hc-website
-
-docker compose -f website/docker-compose.local.yml up -d
-GITHUB_TOKEN=$(gh auth token) GITHUB_BRANCH=cms-sandbox \
-  docker compose -f admin/docker-compose.local.yml --profile minio up -d
+./scripts/local.sh up --build
 ```
 
-| Service | URL |
+That builds both images from this checkout, starts one nginx in front of them, and
+runs the checks. Everything is on **one port**, as on the server:
+
+| | URL |
 | --- | --- |
-| Website | http://localhost:8080 |
-| Admin | http://localhost:3000 |
-| MinIO | http://localhost:9000 |
-| MinIO console | http://localhost:9090 |
-
-Worth checking here specifically, because the dev server does not exercise them:
+| The public site | http://localhost:8080/ |
+| The portal | http://localhost:8080/admin |
 
 ```bash
-curl -o /dev/null -w "%{http_code}\n" http://localhost:8080/nope    # must be 404, not 200
-curl -sI http://localhost:8080/en | grep -i location                # must be relative: /en/
-docker compose -f website/docker-compose.local.yml ps               # must say (healthy)
+./scripts/local.sh smoke      # re-run the checks
+./scripts/local.sh logs edge  # follow one service
+./scripts/local.sh down       # stop and delete the local data
 ```
 
-Tear down:
+The checks cover what the dev server cannot, because neither nginx nor the mount
+point exists there:
 
-```bash
-docker compose -f admin/docker-compose.local.yml --profile minio down -v
-docker compose -f website/docker-compose.local.yml down
 ```
+  ok   a missing page is a real 404                   404
+  ok   /admin redirects when anonymous                302
+  ok   the redirect keeps the prefix                  /admin/login?next=%2Fadmin
+  ok   the portal's assets are mounted                200
+  ok   no link escapes /admin
+  ok   nosniff survives inside /admin                 nosniff
+```
+
+**Run this before pushing anything that touches the portal's links, routes or
+views.** `npm test` proves the prefix holds for the views it can render without a
+database; this proves it for the real thing, signed in, through nginx.
 
 ---
 
@@ -344,6 +366,26 @@ Detail pages come from the collection filtered by language, so the entry must
 exist in the folder matching the URL. `/news/foo/` needs
 `src/content/news/km/foo.md`; `/en/news/foo/` needs the `en/` one.
 `check-translation-pairs.mjs` catches this.
+
+**The portal loads but every link goes to the website's 404 page**
+
+`BASE_PATH` and the prefix nginx proxies disagree. The portal writes `BASE_PATH`
+into every link it emits, and nginx passes `/admin` through to it rather than
+stripping it, so the two have to be the same string. Check `BASE_PATH` in
+`admin/.env` against the `location /admin` block in `nginx/routes.conf`.
+
+The quick confirmation — every link on the login page should start with `/admin`:
+
+```bash
+curl -s http://localhost:8080/admin/login | grep -oE '(href|action)="/[^"]*"' | sort -u
+```
+
+**"curl: (23) client returned ERROR on write" from a deployment script**
+
+Git Bash on Windows. The scripts disable MSYS path translation so container paths
+survive, which also stops native `curl.exe` from understanding `/dev/null`.
+`local.sh` turns translation back on for exactly this reason; a new script that
+calls curl needs the same line.
 
 **Port 4321 or 3000 already in use**
 

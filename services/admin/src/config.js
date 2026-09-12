@@ -16,11 +16,32 @@ function optional(name, fallback = '') {
   return process.env[name] || fallback;
 }
 
+/**
+ * Normalize a mount point: no trailing slash, a leading one required.
+ *
+ * A malformed value would not fail here but in every generated link, so it is
+ * rejected at boot alongside the other required configuration.
+ */
+function basePath(value) {
+  const path = value.trim().replace(/\/+$/, '');
+  if (!path) return '';
+  if (!path.startsWith('/')) throw new Error(`BASE_PATH must start with "/": ${value}`);
+  if (/[?#\s]/.test(path)) throw new Error(`BASE_PATH must be a plain path: ${value}`);
+  return path;
+}
+
 const [owner, repo] = optional('GITHUB_REPO', 'PoscarDigital/se4hc-website').split('/');
 
 export const config = {
   port: Number(optional('PORT', '3000')),
   publicUrl: optional('ADMIN_PUBLIC_URL', 'http://localhost:3000').replace(/\/$/, ''),
+
+  /**
+   * Path the portal is served at. Empty means it owns the origin, which is how
+   * it runs in development. Production serves it under the public site's domain
+   * at `/admin`, and src/paths.js applies it to every URL the app emits.
+   */
+  basePath: basePath(optional('BASE_PATH', '')),
 
   databaseUrl: required('DATABASE_URL'),
   authSecret: required('AUTH_SECRET'),

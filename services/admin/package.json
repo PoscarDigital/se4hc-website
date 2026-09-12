@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "test": "node test/logic.test.mjs && node test/boot.test.mjs"
+    "test": "node test/logic.test.mjs && node test/boot.test.mjs && node test/boot-mounted.test.mjs"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",

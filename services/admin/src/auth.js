@@ -67,7 +67,9 @@ export async function userForToken(token) {
 
 export function setSessionCookie(reply, { token, expires }) {
   reply.setCookie(SESSION_COOKIE, token, {
-    path: '/',
+    // Scoped to the mount point, so on the production domain the session cookie
+    // is never sent with a request for a public page.
+    path: config.basePath || '/',
     httpOnly: true,
     sameSite: 'lax',
     secure: config.isProduction,
@@ -76,7 +78,7 @@ export function setSessionCookie(reply, { token, expires }) {
 }
 
 export function clearSessionCookie(reply) {
-  reply.clearCookie(SESSION_COOKIE, { path: '/' });
+  reply.clearCookie(SESSION_COOKIE, { path: config.basePath || '/' });
 }
 
 export const readSessionCookie = (request) => request.cookies?.[SESSION_COOKIE];

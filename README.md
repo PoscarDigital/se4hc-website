@@ -321,6 +321,9 @@ Helpers in `src/utils/i18n.ts`: `getLangFromUrl`, `useTranslations`, `getLocaliz
 
 ```
 src/config.js        Environment parsing; fails fast on missing required values
+src/app.js           Every plugin, hook and route — what the boot test builds
+src/server.js        Process lifecycle: migrate, bootstrap, listen, shut down
+src/paths.js         Mount point: prefixes links and redirects when BASE_PATH is set
 src/db.js            Postgres schema: users, sessions, settings, audit_log
 src/auth.js          scrypt passwords, server-side revocable sessions, role guards
 src/github.js        Contents + Git Data API client
@@ -341,6 +344,15 @@ Notable behaviours:
 - **Every change is attributed.** Commits carry the editor's name, and `audit_log` records who
   did what and which commit carried it.
 - **Slugs are immutable** once created. They are the published URL and the translation key.
+- **It can be served from a path.** `BASE_PATH=/admin` mounts the whole portal
+  under a prefix, which is how production serves it at
+  `https://se4hc.moeys.gov.kh/admin` rather than on a hostname of its own. Links
+  are written root-relative throughout and the prefix is applied in two places
+  only — `page()` for rendered HTML and an `onSend` hook for `Location` headers,
+  both in `src/paths.js`. That is deliberate: prefixing fifty call sites would
+  mean every future route had to remember a rule, and one that forgot would send
+  an editor out of the portal and into the public site's 404 page. `npm test`
+  runs the whole boot suite twice, mounted and unmounted, to hold that line.
 
 > `services/admin/src/schema.js` and `src/content/config.ts` are two views of the same model —
 > one renders the form, the other validates the build. **When you change one, change the
@@ -354,7 +366,9 @@ DATABASE_URL=postgres://x@localhost/x AUTH_SECRET=x GITHUB_TOKEN=x npm test
 ```
 
 Covers frontmatter round-tripping (including Khmer), form expansion, type coercion, the route
-tree, and the auth guards. Neither suite touches Postgres or the GitHub API.
+tree, the auth guards, and the mount point — the boot suite runs twice, once at the origin and
+once with `BASE_PATH=/admin`, asserting that no link, redirect or asset escapes the prefix.
+None of it touches Postgres or the GitHub API.
 
 ---
 

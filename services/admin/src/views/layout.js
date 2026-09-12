@@ -7,6 +7,8 @@
  * stylesheet loads a Khmer face and the editor grid is two columns.
  */
 
+import { withBase } from '../paths.js';
+
 export function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -33,7 +35,9 @@ export function page({ title, user, active = '', body, flash = null, wide = fals
     })
     .join('');
 
-  return `<!doctype html>
+  // Links throughout the portal are written root-relative; withBase() is where
+  // the mount point is applied, once, to the finished document.
+  return withBase(`<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -63,7 +67,7 @@ ${body}
 </main>
 <script src="/static/admin.js" defer></script>
 </body>
-</html>`;
+</html>`);
 }
 
 /* ---------------------------------------------------------------- widgets -- */

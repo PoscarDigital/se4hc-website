@@ -1,6 +1,8 @@
 import { parseEntry, serializeEntry, normalizeSlug } from '../src/content.js';
 import { expandForm, coerce, normalizeAttachments } from '../src/formdata.js';
 import { getPath, setPath } from '../src/schema.js';
+import { applyBase, withBase } from '../src/paths.js';
+import { page } from '../src/views/layout.js';
 
 let pass = 0, fail = 0;
 const check = (name, cond, extra='') => {
@@ -98,6 +100,43 @@ check('setPath creates', obj.a.b.c === 1);
 console.log('\n-- slugs --');
 check('slug normalizes', normalizeSlug('  Q4 2025 Progress Report! ') === 'q4-2025-progress-report');
 check('slug strips unicode', normalizeSlug('របាយការណ៍ report') === 'report');
+
+console.log('\n-- mount point --');
+// applyBase is what rewrites every Location header in production.
+check('prefixes a root-relative path', applyBase('/media', '/admin') === '/admin/media');
+check('prefixes the root itself', applyBase('/', '/admin') === '/admin/');
+check('is idempotent', applyBase('/admin/media', '/admin') === '/admin/media');
+check('leaves the mount point alone', applyBase('/admin', '/admin') === '/admin');
+// The trap this guards: a path that merely starts with the same letters must be
+// prefixed, not mistaken for one already mounted.
+check('prefixes a lookalike path', applyBase('/administrators', '/admin') === '/admin/administrators');
+check('ignores an absolute URL', applyBase('https://x.test/a', '/admin') === 'https://x.test/a');
+check('ignores a protocol-relative URL', applyBase('//x.test/a', '/admin') === '//x.test/a');
+check('unmounted is a no-op', applyBase('/media', '') === '/media');
+
+// withBase rewrites a rendered document. Every signed-in view is built by page(),
+// so covering it here covers the nav, the topbar and the sign-out form at once —
+// the views a test cannot reach without Postgres and a GitHub token.
+const dashboard = withBase(
+  page({ title: 'Dashboard', user: { username: 'sok', role: 'admin' }, body: '<a href="/media">Media</a>' }),
+  '/admin'
+);
+const links = [...dashboard.matchAll(/\b(?:href|src|action)="(\/[^"]*)"/g)].map((m) => m[1]);
+const escapees = links.filter((href) => href !== '/admin' && !href.startsWith('/admin/'));
+check('page() links all sit under the mount point', escapees.length === 0, escapees.join(' '));
+check('the nav is rewritten', dashboard.includes('href="/admin/collections/news"'));
+check('the sign-out form is rewritten', dashboard.includes('action="/admin/logout"'));
+check('the stylesheet is rewritten', dashboard.includes('href="/admin/static/admin.css"'));
+check('an external stylesheet is untouched', dashboard.includes('href="https://fonts.googleapis.com'));
+
+// Escaped content cannot forge an attribute: a quote in an entry title arrives as
+// &quot;, so a title can never steer the rewrite or smuggle in a link.
+const hostile = page({
+  title: 'Report" href="/evil',
+  user: { username: 'sok', role: 'editor' },
+  body: '<p>ok</p>',
+});
+check('user content cannot inject a link', !withBase(hostile, '/admin').includes('href="/evil'));
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
